@@ -52,9 +52,13 @@
                             </li>
                         </ul>
                         <div class="log-btn ">
-                            <a href="#" class="cta">Login
+                            @if(auth()->check())
+                                <a href="{{ url('/logout') }}" class="cta">Logout
+                            </a>  
+                            @else
+                            <a href="{{ url('/login') }}" class="cta">Login
                             </a>
-
+                            @endif
                         </div>
                     </div>
                 </div>

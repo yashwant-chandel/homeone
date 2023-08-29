@@ -45,20 +45,37 @@
                                 <li class="nk-menu-heading">
                                     <a href="{{ url('admin-dashboard') ?? ''}}"><h6 class="overline-title text-primary-alt">Dashboard</h6></a>
                                 </li>
-                                <!-- <li class="nk-menu-item has-sub">
+                                <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                                        <span class="nk-menu-text">Projects</span>
+                                        <span class="nk-menu-text">Employees</span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="html/project-card.html" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+                                            <a href="{{ url('admin-dashboard/employerequests') }}" class="nk-menu-link"><span class="nk-menu-text">Employees Requests</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+                                            <a href="{{ url('admin-dashboard/employeeslist') }}" class="nk-menu-link"><span class="nk-menu-text">Employees List</span></a>
                                         </li>
                                     </ul>
-                                </li> -->
+                                </li>
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                        <span class="nk-menu-text">Products</span>
+                                    </a>
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/employerequests') }}" class="nk-menu-link"><span class="nk-menu-text">Products List</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/employerequests') }}" class="nk-menu-link"><span class="nk-menu-text">Add Products</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/category') }}" class="nk-menu-link"><span class="nk-menu-text">Product Category</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <!-- <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
