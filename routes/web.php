@@ -37,10 +37,21 @@ Route::post('employestatus',[UserController::class,'employestatus']);
 //products
 Route::get('admin-dashboard/category',[ProductController::class,'category']);
 Route::post('admin-dashboard/categoriesadd',[ProductController::class,'addCategory']);
+Route::post('catgoriesdelete',[ProductController::class,'deleteCategory']);
 
+Route::get('admin-dashboard/productsAdd',[ProductController::class,'addProductsView']);
+Route::post('productsAdd',[ProductController::class,'addProduct']);
+Route::get('admin-dashboard/products',[ProductController::class,'products']);
+
+Route::get('admin-dashboard/product-edit/{slug}',[ProductController::class,'editProduct']);
+Route::post('productsUpdate',[ProductController::class,'productsUpdate']);
 
 });
 
+
+
+
+// Front controller start from here :
 Route::get('/',[FrontController::class,'index']);
 Route::get('/contact',[FrontController::class,'contact']);
 Route::get('/lawn',[FrontController::class,'lawn']);

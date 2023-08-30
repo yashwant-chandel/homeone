@@ -9,7 +9,8 @@
     <link rel="shortcut icon" href="{{ asset('favicon/favicon.png') }}">
     <title>HomeOne | Admin Dashbaord</title>
     <!-- add coustam css file here -->
-  
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}"> 
@@ -66,10 +67,10 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('admin-dashboard/employerequests') }}" class="nk-menu-link"><span class="nk-menu-text">Products List</span></a>
+                                            <a href="{{ url('admin-dashboard/products') }}" class="nk-menu-link"><span class="nk-menu-text">Products List</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('admin-dashboard/employerequests') }}" class="nk-menu-link"><span class="nk-menu-text">Add Products</span></a>
+                                            <a href="{{ url('admin-dashboard/productsAdd') }}" class="nk-menu-link"><span class="nk-menu-text">Add Products</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/category') }}" class="nk-menu-link"><span class="nk-menu-text">Product Category</span></a>

@@ -112,7 +112,6 @@ $(document).ready(function(){
         var name = $('#name').val();
         var slug = $('#slug').val();
         var id = $('#id').val();
-  
         // return false;
         if (name === '' || slug === '') {
             NioApp.Toast('Fields cannot be null', 'info', {position: 'top-right'});
@@ -126,7 +125,7 @@ $(document).ready(function(){
                     name : name,
                     slug : slug,
                     id : id,
-                    _token: '{{csrf_token()}}'
+                    _token: '{{csrf_token()}}',
                 },
             success: function(response) {
                 console.log(response);

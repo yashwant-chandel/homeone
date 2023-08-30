@@ -1,8 +1,6 @@
 @extends('admin_layout/index')
 @section('content')
 
-@extends('admin_layout/index')
-@section('content')
                         <div class="nk-block nk-block-lg">
                                         <div class="nk-block-head">
                                             <div class="nk-block-head-content">
@@ -72,5 +70,4 @@
                                             </table>
                                         </div><!-- .card-preview -->
                                     </div>
-@endsection
 @endsection

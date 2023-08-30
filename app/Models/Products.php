@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     use HasFactory;
+    public function category(){
+        return $this->hasOne(Category::class,'id','cat_id');
+    }
 }
