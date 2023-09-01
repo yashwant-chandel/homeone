@@ -48,7 +48,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                        <span class="nk-menu-icon"><i class="icon fas fa-users"></i></span>
                                         <span class="nk-menu-text">Employees</span>
                                     </a>
                                     <ul class="nk-menu-sub">
@@ -62,7 +62,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                        <span class="nk-menu-icon"><i class="icon fab fa-product-hunt"></i></span>
                                         <span class="nk-menu-text">Products</span>
                                     </a>
                                     <ul class="nk-menu-sub">
@@ -74,6 +74,20 @@
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/category') }}" class="nk-menu-link"><span class="nk-menu-text">Product Category</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><i class="icon fas fa-images"></i></em></span>
+                                        <span class="nk-menu-text">Gallery</span>
+                                    </a>
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/gallery') }}" class="nk-menu-link"><span class="nk-menu-text">Gallery List</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/gallery-add') }}" class="nk-menu-link"><span class="nk-menu-text">Add Gallery</span></a>
                                         </li>
                                     </ul>
                                 </li>

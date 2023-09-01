@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Products;
 use App\Models\Media;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -60,9 +61,11 @@ class ProductController extends Controller
     }
     
     public function addProductsView(Request $request){
+
         $category = Category::all();
         return view('Admin.Products.addProducts',compact('category'));
     }
+    //  function for add product 
 
     public function addProduct(Request $request){
         $request->validate([
@@ -97,23 +100,8 @@ class ProductController extends Controller
                 $product->featured_image = $featuredImageName;    
             }
 
-            $imageNames = [];
-            if ($request->hasFile('images')) {
-                $files = $request->file('images');
-                foreach ($files as $file) {
-                    $extension = $file->getClientOriginalExtension();
-                    $name = 'product_' . rand(0, 1000) . '_' . time() . '.' . $extension;
-                    $file->move(public_path('productIMG'), $name);
-                    
-                        $media = new Media;
-                        $media->image_name = $name;
-                        $media->image_path = url('productIMG/'.$name);
-                        $media->save();
-                    
-                        $imageNames[] = $media->id;
-                }
-            }
-            $product->images = json_encode($imageNames);    
+            $imageNames = $this->uploadImages($request);
+            $product->images = json_encode($imageNames);
 
             $product->save();
             return redirect()->back()->with('success','Product added succefully.');
@@ -126,6 +114,8 @@ class ProductController extends Controller
         $products = Products::with('category')->get();
         return view('Admin.Products.index',compact('products'));
     }
+    // function for return view of edit page :
+
     public function editProduct(Request $request, $slug) {
         $category = Category::all();
         $product = Products::where('slug', $slug)->with('category')->first();
@@ -136,82 +126,128 @@ class ProductController extends Controller
     
         return view('Admin.Products.update', compact('product','category'));
     }
+    // function for Product update :
+
     public function productsUpdate(Request $request){
-//         echo '<pre>';
-//         print_r($request->all());
-//         print_r($request->oldImg);
-//         print_r($request->existing_images);
-//         $array1 = json_decode($request->oldImg);
-//         $array2 = $request->existing_images;
-//         $array3 = ['1', '3'];
+        if ($request->id) {
+            $request->validate([
+                'product_name' => 'required',
+                'slug' => 'required|unique:products,slug,' . $request->id,
+                'short_note' => 'required',
+                'cat_id' => 'required',
+                'Quantity' => 'required',
+                'price' => 'required',
+                'description' => 'required',
+            ]);
+        
+            try {
+                $product = Products::find($request->id);
+                $product->product_name = $request->product_name;
+                $product->slug = $request->slug;
+                $product->short_note = $request->short_note;
+                $product->cat_id = $request->cat_id;
+                $product->Quantity = $request->Quantity;
+                $product->price = $request->price;
+                $product->description = $request->description;
+        
+         
+                $oldImg = json_decode($request->oldImg);
+                $existingImg = $request->existing_images;
 
-//         $output = array_merge(array_diff($array1, $array2), array_diff($array2, $array1));
-//         $output = array_merge($output, $array3);
-//         print_r($output);
-
-// // Now you can use $output as needed
-
-//         die();
-        if($request->id){
-        $request->validate([
-            'product_name' => 'required',
-            'slug' => 'required|unique:products,slug,' . $request->id,
-            'short_note' => 'required',
-            'cat_id' => 'required',
-            'Quantity' => 'required',
-            'price' => 'required',
-            'description' => 'required',
-
-        ]);
-        try {
-            $product = Products::find($request->id);
-            $product->product_name = $request->product_name;
-            $product->slug = $request->slug;
-            $product->short_note = $request->short_note;
-            $product->cat_id = $request->cat_id;
-            $product->Quantity = $request->Quantity;
-            $product->price = $request->price;
-            $product->description = $request->description;
-            // // 
-            // $oldImg = json_decode($request->oldImg);
-            // $existingImg = $request->existing_images;
-            // $removedImages = array_merge(array_diff($array1, $array2), array_diff($array2, $array1));
-
-            if ($request->hasFile('featured_image')) {
-                $featuredImage = $request->file('featured_image');
-                $extension = $featuredImage->getClientOriginalExtension();
-                $featuredImageName = 'product_'.rand(0,1000).time().'.'.$extension;;
-                $featuredImage->move(public_path().'/productIMG/',$featuredImageName);
-                
-                $product->featured_image = $featuredImageName;    
-            }
-
-            // $imageNames = [];
-            if ($request->hasFile('images')) {
-                $files = $request->file('images');
-                foreach ($files as $file) {
-                    $extension = $file->getClientOriginalExtension();
-                    $name = 'product_' . rand(0, 1000) . '_' . time() . '.' . $extension;
-                    $file->move(public_path('productIMG'), $name);
-                    
-                        $media = new Media;
-                        $media->image_name = $name;
-                        $media->image_path = url('productIMG/'.$name);
-                        $media->save();
-                    
-                        $imageNames[] = $media->id;
+                if (!is_null($existingImg)) {
+                    $removedImages = array_merge(array_diff($oldImg, $existingImg), array_diff($existingImg, $oldImg));
+                } else {
+                    $removedImages = $oldImg;
                 }
-            }
-            $product->images = json_encode($imageNames);    
+                
+                foreach ($removedImages as $remove) {
+                    $deleteImg = Media::where('id', $remove)->first();
+                    
+                    if ($deleteImg) {
+                        $image_path = public_path('productIMG/' . $deleteImg->image_name);
+                        
+                        if (File::exists($image_path)) {
+                            File::delete($image_path);
+                            $deleteImg->delete();
+                        }
+                    }
+                }
+                
+                if ($request->hasFile('featured_image')) {
+                    $featuredImage = $request->file('featured_image');
+                    $extension = $featuredImage->getClientOriginalExtension();
+                    $featuredImageName = 'product_' . rand(0, 1000) . time() . '.' . $extension;
+                    $featuredImage->move(public_path('productIMG'), $featuredImageName);
+                    $product->featured_image = $featuredImageName;
+                }
+        
+                $imageNames = $this->uploadImages($request);
+                $updatedImageIds = array_merge($existingImg, $imageNames);
+                $product->images = json_encode($updatedImageIds);
 
-            $product->save();
-            return redirect('admin-dashboard/product-edit/'.$request->slug)->with('success','Product updated succefully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while adding the product.');
+
+                $product->save();
+                return redirect('admin-dashboard/product-edit/' . $request->slug)->with('success', 'Product updated successfully.');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'An error occurred while updating the product.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Failed to update product.');
         }
-    }else{
-        return redirect()->back()->with('error', 'failed to update product');
+        
     }
+
+    // Function for upload Multiple images and get there Id's in array : 
+
+    protected function uploadImages(Request $request)
+    {
+        $imageNames = [];
+    
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $name = 'product_' . rand(0, 1000) . '_' . time() . '.' . $extension;
+                $file->move(public_path('productIMG'), $name);
+    
+                $media = new Media;
+                $media->image_name = $name;
+                $media->image_path = url('productIMG/' . $name);
+                $media->save();
+    
+                $imageNames[] = $media->id;
+            }
+        }
+    
+        return $imageNames;
+    }
+
+    // Function for remove product with Image form folder and Database :
+
+    public function removeProduct(Request $request,$slug){
+        if($slug){
+            $product = Products::where('slug', $slug)->first();
+    
+            if ($product) {
+                $removedImages = json_decode($product->images);
+                foreach ($removedImages as $remove) {
+                    $deleteImg = Media::where('id', $remove)->first();
+                    
+                    if ($deleteImg) {
+                        $image_path = public_path('productIMG/' . $deleteImg->image_name);
+                        
+                        if (File::exists($image_path)) {
+                            File::delete($image_path);
+                            $deleteImg->delete();
+                        }
+                    }
+                }
+                $product->delete();
+            }else{
+                return redirect()->back()->with('error', 'Invalid Request.');
+            }
+
+            return redirect()->back()->with('success','Product has been removed');
+        }
     }
     
         

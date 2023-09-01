@@ -120,25 +120,23 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-flex">
-                        <input type="hidden" name="oldImg" value="{{ $product->images ?? '' }}">
-                        <?php $images = json_decode($product->images);
-                        
-                        ?>
-                        
-                        @foreach ($images as $image)
-                            <?php
-                                 $img = \App\Models\Media::find($image);
-                            ?>
-                             <div class="image-container" style="margin-right: 1rem;">
-                            <i data-id="{{ $img->id ?? '' }}" class="fas fa-trash-alt text-danger remove-image" style="position: absolute; cursor: pointer;"></i>
-                            <img class="image-fluid" style="max-width: 5rem" src="{{ url('productIMG', $img->image_name) }}" alt="">
-                            <input type="hidden" name="existing_images[]" value="{{ $img->id }}">
+                            <input type="hidden" name="oldImg" value="{{ $product->images ?? '' }}">
+                            <?php $images = json_decode($product->images); ?>
+                            
+                            <div class="image-row" style="display: flex; flex-wrap: wrap;gap: 1rem;">
+                                @foreach ($images as $image)
+                                    <?php $img = \App\Models\Media::find($image); ?>
+                                    <div class="image-container" style="position: relative;margin-right: 1rem;">
+                                        <i data-id="{{ $img->id ?? '' }}" class="fas fa-trash-alt text-danger remove-image" style="position: absolute; cursor: pointer;"></i>
+                                        <img class="image-fluid" style="max-width: 5rem" src="{{ url('productIMG', $img->image_name) }}" alt="">
+                                        <input type="hidden" name="existing_images[]" value="{{ $img->id }}">
+                                    </div>
+                                @endforeach
                             </div>
+                        </div>
 
-                        @endforeach
-                        
                     </div>
-                    </div>
+                   
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="form-label" for="description">Description</label>
@@ -165,7 +163,7 @@
 $(document).ready(function(){
     $('#product_name').on('keyup',function(){
         let name = $(this).val().toLowerCase();
-        let slug = name.replace(/\s+/g, "-"); // Replace consecutive spaces with a single dash
+        let slug = name.replace(/\s+/g, "-"); 
         $('#slug').val(slug);
     });
 

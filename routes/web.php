@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Front\FrontController;
 
@@ -45,6 +46,18 @@ Route::get('admin-dashboard/products',[ProductController::class,'products']);
 
 Route::get('admin-dashboard/product-edit/{slug}',[ProductController::class,'editProduct']);
 Route::post('productsUpdate',[ProductController::class,'productsUpdate']);
+Route::get('product-remove/{slug}',[ProductController::class,'removeProduct']);
+
+
+// GalleryController :
+Route::get('admin-dashboard/gallery-add',[GalleryController::class,'addGalleryView']);
+Route::post('galleryAdd',[GalleryController::class,'addGallery']);
+
+Route::get('admin-dashboard/gallery',[GalleryController::class,'index']);
+Route::get('admin-dashboard/gallery-edit/{slug}',[GalleryController::class,'editGallery']);
+Route::post('galleryUpdate',[GalleryController::class,'galleryUpdate']);
+Route::get('gallery-remove/{slug}',[GalleryController::class,'removeGallery']);
+
 
 });
 
