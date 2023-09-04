@@ -21,9 +21,9 @@
                 </div>
                 <div class="select-data"><select>
                         <option>Sort By: Alphabetically: A-Z</option>
-                        <option>option</option>
-                        <option>option</option>
-                        <option>option</option>
+                        <option>Sort By: Alphabetically: Z-A</option>
+                        <option>Sort By: Price: 1-9</option>
+                        <option>Sort By: Price: 9-1</option>
                     </select></div>
             </div>
             <? $pNo = 0; ?>
@@ -37,7 +37,7 @@
                         <div class="products-data">
                             <div class="products-name">
                                <h4>{{ $product->product_name ?? '' }}</h4> <!-- <sup>TM</sup> -->
-                                <p>{{ $product->short_note ?? ''}}</p>
+                                <p><?php print_r($product->short_note); ?></p>
                             </div>
                             <div class="products-star"><i class="fa-sharp fa-solid fa-star"></i><i
                                     class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i

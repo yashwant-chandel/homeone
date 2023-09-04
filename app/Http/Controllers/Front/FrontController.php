@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\Gallery;
 class FrontController extends Controller
 {
     public function index(){
@@ -20,4 +21,9 @@ class FrontController extends Controller
         return view('Front.exteriors');
     }
   
+    public function gallery(){
+        $gallery = Gallery::with('images')->get();
+      
+        return view('Front.gallery',compact('gallery'));
+    }
 }

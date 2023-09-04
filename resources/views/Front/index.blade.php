@@ -8,7 +8,6 @@
             </div>
         </div>
     </section>
-
     <section class="about-sec p-130 pb-0">
         <div class="container">
             <div class="row align-items-center">

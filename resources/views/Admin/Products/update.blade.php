@@ -42,7 +42,7 @@
                             @enderror</sup>
                             <div class="form-control-wrap">
                                 <textarea class="form-control form-control-sm" id="short_note" name="short_note" value="{{ $product->short_note ?? '' }}"
-                                    placeholder="Write your message" >{{ $product->short_note ?? '' }}</textarea>
+                                    placeholder="Write your message" ><?php print_r($product->short_note); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -196,6 +196,12 @@
 <script>
     ClassicEditor
         .create(document.querySelector('#details'))
+        .then(editor => { console.log(editor); })
+        .catch(error => { console.error(error); });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#short_note'))
         .then(editor => { console.log(editor); })
         .catch(error => { console.error(error); });
 </script>

@@ -74,5 +74,7 @@ Route::get('/exteriors',[FrontController::class,'exteriors']);
 Route::get('/store',[ShopController::class,'index']);
 Route::get('/store-details/{slug}',[ShopController::class,'details']);
 
+Route::get('/shop',[FrontController::class,'shop']);
+Route::get('/gallery',[FrontController::class,'gallery']);
 
 

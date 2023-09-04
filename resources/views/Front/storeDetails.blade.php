@@ -57,7 +57,7 @@
                 <div class="col-md-6">
                     <div class="store-details-data">
                         <h3>{{ $product->product_name ?? '' }}</h3>
-                        <p>{{ $product->short_note ?? '' }}</p>
+                        <p><?php print_r($product->short_note); ?></p>
                         <div class="products-price">
                                 @if($product->sale_price)
                                         <h6>${{ $product->sale_price ?? '' }}<span>${{ $product->price ?? '' }}</span></h6>
@@ -118,10 +118,10 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active show" id="tabs-1" role="tabpanel">
-                        <?php echo $product->description; ?>
+                        <?php print_r($product->description); ?>
                     </div>
                     <div class="tab-pane " id="tabs-2" role="tabpanel">
-                    <?php echo $product->details; ?>
+                    <?php print_r($product->details); ?>
                     </div>
                     <div class="tab-pane" id="tabs-3" role="tabpanel">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has

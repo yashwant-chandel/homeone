@@ -177,6 +177,12 @@
         .catch(error => { console.error(error); });
 </script>
 <script>
+    ClassicEditor
+        .create(document.querySelector('#short_note'))
+        .then(editor => { console.log(editor); })
+        .catch(error => { console.error(error); });
+</script>
+<script>
 $(document).ready(function(){
     $('#product_name').on('keyup',function(){
         let name = $(this).val().toLowerCase();
