@@ -74,12 +74,23 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="price">Product Price</label>
+                            <label class="form-label" for="price">Regular Price</label>
                             <sup>@error('price')
                                 <div class="error text-danger">{{ $message }}</div>
                             @enderror</sup>
                             <div class="form-control-wrap">
                                 <input type="number" class="form-control" id="price" name="price"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="sale_price">Sale Price</label>
+                            <sup>@error('sale_price')
+                                <div class="error text-danger">{{ $message }}</div>
+                            @enderror</sup>
+                            <div class="form-control-wrap">
+                                <input type="number" class="form-control" id="sale_price" name="sale_price"  />
                             </div>
                         </div>
                     </div>
@@ -113,15 +124,27 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-label" for="description">Description</label>
                             <sup>@error('description')
                                 <div class="error text-danger">{{ $message }}</div>
                             @enderror</sup>
                             <div class="form-control-wrap">
-                                <textarea class="form-control form-control-sm" id="description" name="description"
+                                <textarea class="form-control form-control-sm" id="editor-text-section" name="description"
                                     placeholder="Write your description" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="details">Details</label>
+                            <sup>@error('details')
+                                <div class="error text-danger">{{ $message }}</div>
+                            @enderror</sup>
+                            <div class="form-control-wrap">
+                                <textarea class="form-control form-control-sm" id="details" name="details"
+                                    placeholder="Write your Details" ></textarea>
                             </div>
                         </div>
                     </div>
@@ -135,6 +158,24 @@
         </div>
     </div>
 </div>
+<script>
+      const editorId = 'editor-text-section';
+             const editor =  ClassicEditor
+            .create(document.querySelector(`#${editorId}`))
+            .then(editor => {
+               
+                // console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#details'))
+        .then(editor => { console.log(editor); })
+        .catch(error => { console.error(error); });
+</script>
 <script>
 $(document).ready(function(){
     $('#product_name').on('keyup',function(){

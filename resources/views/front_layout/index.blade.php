@@ -14,12 +14,14 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/font/stylesheet.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/custom.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <title> HomeOne </title>
 </head>
 
 <body>
 
-    <header class="site-header">
+    <header class="site-header custom_header {{ request()->is('store-details/*') ? 'custom_header' : '' }}">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand d-lg-none" href="#"><img src="img/site-logo.png" alt=""></a>

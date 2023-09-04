@@ -78,6 +78,8 @@ class ProductController extends Controller
             'images' => 'required',
             'featured_image' => 'required',
             'description' => 'required',
+            'details' => 'required',
+            'sale_price' => 'required',
 
         ]);
         try {
@@ -89,6 +91,8 @@ class ProductController extends Controller
             $product->Quantity = $request->Quantity;
             $product->price = $request->price;
             $product->description = $request->description;
+            $product->details = $request->details;
+            $product->sale_price = $request->sale_price;
             
 
             if ($request->hasFile('featured_image')) {
@@ -138,6 +142,8 @@ class ProductController extends Controller
                 'Quantity' => 'required',
                 'price' => 'required',
                 'description' => 'required',
+                'details' => 'required',
+                'sale_price' => 'required',
             ]);
         
             try {
@@ -149,6 +155,8 @@ class ProductController extends Controller
                 $product->Quantity = $request->Quantity;
                 $product->price = $request->price;
                 $product->description = $request->description;
+                $product->details = $request->details;
+                $product->sale_price = $request->sale_price;
         
          
                 $oldImg = json_decode($request->oldImg);

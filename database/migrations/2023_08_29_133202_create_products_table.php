@@ -18,9 +18,12 @@ return new class extends Migration
             $table->string('short_note');
             $table->integer('cat_id');
             $table->integer('Quantity');
+            $table->integer('price');
+            $table->integer('sale_price');
             $table->string('images');
             $table->integer('featured_image');
             $table->text('description');
+            $table->text('details');
             $table->timestamps();
         });
     }
