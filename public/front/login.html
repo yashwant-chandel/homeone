@@ -11,10 +11,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/font/stylesheet.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/custom.css') }}">
-    <title> HomeOne </title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="font/stylesheet.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <title> login page </title>
 </head>
 
 <body>
@@ -33,33 +33,29 @@
                     <div class="col-lg-5 col-md-12">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('exteriors') }}">Exteriors</a>
+                                <a class="nav-link" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Gallery</a>
+                                <a class="nav-link" href="#">Features</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('lawn') }}">Lawn</a>
+                                <a class="nav-link" href="#">Pricing</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-md-2  d-none d-lg-block d-md-none">
-                        <a class=" navbar-brand mx-auto" href="{{ url('') }}"><img src="{{ asset('front/img/site-logo.png') }}" alt=""></a>
+                        <a class=" navbar-brand mx-auto" href="#"><img src="img/site-logo.png" alt=""></a>
                     </div>
                     <div class="col-lg-5 col-md-12 d-flex align-items-center justify-content-end">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('contact') }}">Contact</a>
+                                <a class="nav-link" href="#">contact</a>
                             </li>
                         </ul>
                         <div class="log-btn ">
-                            @if(auth()->check())
-                                <a href="{{ url('/logout') }}" class="cta">Logout
-                            </a>  
-                            @else
-                            <a href="{{ url('/login') }}" class="cta">Login
+                            <a href="#" class="cta">Login
                             </a>
-                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -72,7 +68,71 @@
         </div>
     </header>
 
-    @yield('layout')
+    <section class="banner-sec" style="background-image: url(./img/login-banner.png);">
+        <div class="container">
+            <div class="banner-text">
+                <h1>log in</h1>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="login-sec p-130">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="login-box">
+                        <img src="img/login-box.png" alt="">
+                    </div>
+
+                </div>
+                <div class="col-md-6 custom_form">
+                    <div class="login-text">
+                        <h2> <span class="blue">Welcome back.</span></h2>
+
+                    </div>
+                    <div class="contact_detail ">
+                        <form class="contact_detail-form">
+
+                            <div class="form-group">
+                                <input type="Email" class="form-control" aria-describedby="emailHelp"
+                                    placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <input type="Password" class="form-control" aria-describedby="emailHelp"
+                                    placeholder="Password">
+                            </div>
+
+                            <div class="remember-box">
+                                <div class="remember_data">
+                                    <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent"
+                                        type="checkbox" value="yes">
+                                    <p>Remember Me</p>
+
+                                </div>
+                                <div class="forgot-data">
+                                    <p>Forgot Password?</p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="submit_cta">
+                                <a href="" class="submit-btn">Login</a>
+                                <a href="" class="create-btn">Create an Account</a>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
     <footer class="site-footer light">
         <div class="top-footer p-130">
@@ -100,13 +160,13 @@
                             <h4>Quick Links</h4>
                             <ul>
                                 <li>
-                                    <a href="{{ url('exteriors') }}">Exteriors</a>
+                                    <a href="#">Exteriors</a>
                                 </li>
                                 <li>
                                     <a href="#">Gallery</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('lawn') }}">Lawn</a>
+                                    <a href="#">Lawn</a>
                                 </li>
                             </ul>
                         </div>
@@ -149,5 +209,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="{{ asset('front/js/script.js') }}"></script>
+    <script src="js/script.js"></script>
 </body>
+
+</html>

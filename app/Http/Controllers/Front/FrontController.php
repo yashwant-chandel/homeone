@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Products;
 class FrontController extends Controller
 {
     public function index(){
@@ -18,5 +18,9 @@ class FrontController extends Controller
     }
     public function exteriors(){
         return view('Front.exteriors');
+    }
+    public function shop(){
+        $products = Products::all();
+        return view('Front.shop',compact('products'));
     }
 }
