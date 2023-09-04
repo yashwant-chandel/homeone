@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('gallery_title');
             $table->string('slug');
+            $table->string('featured_image');
             $table->integer('status')->default(1);
             $table->timestamps();
         });

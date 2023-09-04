@@ -41,9 +41,10 @@ class GalleryController extends Controller
                         
                         $gallery->featured_image = $featuredImageName;    
                     }
+               
                 $gallery->save();
-                $imageNames = $this->uploadImages($request, $gallery->id);
-
+                
+                 $imageNames = $this->uploadImages($request, $gallery->id);
                 return redirect()->back()->with('success', 'Gallery has been uploaded');
 
             } catch (\Exception $e) {
@@ -136,9 +137,9 @@ class GalleryController extends Controller
     
                 $media = new Media;
                 $media->image_name = $name;
-                $media->image_path = url('galleryIMG/' . $name);
+                $media->image_path = 'galleryIMG/' . $name;
                 $media->gallery_id = $galleryId;
-                $media->save(); 
+                $media->save();
             }
         }
     

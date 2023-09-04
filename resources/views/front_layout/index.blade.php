@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/font/stylesheet.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/custom.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <title> HomeOne </title>
 </head>
 
@@ -36,7 +37,7 @@
                                 <a class="nav-link" href="{{ url('exteriors') }}">Exteriors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Gallery</a>
+                                <a class="nav-link" href="{{ url('gallery') }}">Gallery</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('lawn') }}">Lawn</a>
@@ -103,7 +104,7 @@
                                     <a href="{{ url('exteriors') }}">Exteriors</a>
                                 </li>
                                 <li>
-                                    <a href="#">Gallery</a>
+                                    <a href="{{ url('gallery') }}">Gallery</a>
                                 </li>
                                 <li>
                                     <a href="{{ url('lawn') }}">Lawn</a>

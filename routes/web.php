@@ -69,7 +69,7 @@ Route::get('/',[FrontController::class,'index']);
 Route::get('/contact',[FrontController::class,'contact']);
 Route::get('/lawn',[FrontController::class,'lawn']);
 Route::get('/exteriors',[FrontController::class,'exteriors']);
-
 Route::get('/shop',[FrontController::class,'shop']);
+Route::get('/gallery',[FrontController::class,'gallery']);
 
 
