@@ -81,5 +81,7 @@ Route::get('/gallery',[FrontController::class,'gallery']);
 
 // Add To cart
 Route::post('addToCart',[CartController::class,'addToCart']);
-
+Route::get('cart',[CartController::class,'index']);
+Route::post('update-cart',[CartController::class,'update']);
+Route::post('remove-cart',[CartController::class,'removeCart']);
 

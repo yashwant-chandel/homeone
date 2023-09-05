@@ -14,7 +14,13 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/font/stylesheet.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/custom.css') }}">
+    <!-- Toaster -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+    <!-- end toaster -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+   
+
     <title> HomeOne </title>
 </head>
 
@@ -142,6 +148,13 @@
             </div>
         </div>
     </footer>
+    <!-- toaster script -->
+    <!-- <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
+    <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
+    <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
+    <script src="{{ asset('admin-theme/assets/js/example-toastr.js?ver=3.1.2') }}"></script>
+    <script src="{{ asset('admin-theme/assets/js/libs/datatable-btns.js?ver=3.1.2') }}"></script> -->
+    <!-- end toster scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mhayes-twentytwenty/1.0.0/js/jquery.twentytwenty.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
