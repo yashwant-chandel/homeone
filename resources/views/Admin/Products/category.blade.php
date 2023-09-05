@@ -1,6 +1,6 @@
 @extends('admin_layout/index')
 @section('content')
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-between">
 {{ Breadcrumbs::render('Category') }}
 </div>
 <div class="card card-bordered card-preview d-none" id="addnewcard">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                        <div class="form-group">
-                            <!--  <label class="form-label" for="slug">Slug</label>-->
+                             <label class="form-label" for="slug">Slug</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" name="slug" id="slug"
                                     placeholder="Category slug">
@@ -45,7 +45,7 @@
 <div class="nk-block nk-block-lg my-4">
     <div class="nk-block-head">
         <div class="nk-block-head-content d-flex justify-content-between">
-            <h4 class="nk-block-title">PROPERTY TYPE LIST</h4>
+            <h4 class="nk-block-title">Categories</h4>
             <button class="btn btn-primary" id="addnew">Add New</button>
         </div>
     </div>
@@ -56,14 +56,14 @@
                     <th class="tb-tnx-id"><span class="">#</span></th>
                     <th class="tb-tnx-info">
                         <span class="tb-tnx-desc d-none d-sm-inline-block">
-                            <span>Property Type</span>
+                            <span>Category Name</span>
                         </span>
                     </th>
-                    <!-- <th class="tb-tnx-info">
+                    <th class="tb-tnx-info">
                         <span class="tb-tnx-desc d-none d-sm-inline-block">
                             <span>Category Slug</span>
                         </span>
-                    </th> -->
+                    </th>
                     <th class="tb-tnx-action">
                         <span>Action</span>
                     </th>
@@ -79,7 +79,11 @@
                 <div class="tb-tnx-desc">
                     <input type="text" data-id="{{ $cat->id ?? '' }}" class="titleName name{{ $cat->id ?? '' }}" value="{{ $cat->name ?? ''}}"  disabled style="border: none; background: transparent;" />
                 </div>
-               
+            </td>
+            <td class="tb-tnx-info">
+                <div class="tb-tnx-desc">
+                    <input type="text" data-id="{{ $cat->slug ?? '' }}" class="titleName name{{ $cat->slug ?? '' }}" value="{{ $cat->slug ?? ''}}"  disabled style="border: none; background: transparent;" />
+                </div>
             </td>
           
             <td class="tb-tnx-action">
@@ -92,11 +96,11 @@
                             <li><a href="#" data-id ="{{$cat->id ?? ''  }}"  class="remove-category" >Remove</a></li>
                         </ul>
                     </div>
-                </div>
-                
+                </div> 
             </td>
-            @endforeach
         </tr> 
+            @endforeach
+        
     </tbody>
         </table>
     </div><!-- .card-preview -->

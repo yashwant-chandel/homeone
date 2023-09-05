@@ -72,7 +72,7 @@
                     <h4>Leave Us Your Info And We Will Get Back To You</h4>
                 </div>
 
-                <form class="contact_detail-form">
+                <form class="contact_detail-form" method="post" action="{{ url('') }}">
                     <div class="form-group">
                         <input type="text" class="form-control"  aria-describedby="emailHelp" name="name" placeholder="Name">
                       </div>
@@ -87,7 +87,7 @@
                       </div>
 
                       <div class="submit_cta">
-                        <a class="submit-btn">Submit</a>
+                        <button class="submit-btn">Submit</button>
                       </div>
                 </form>
 

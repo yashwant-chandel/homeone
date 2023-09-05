@@ -40,7 +40,7 @@
                                 <?php $num = 0; ?>
                                 @foreach($g->images as $image)
                                 <?php $num++; ?>
-                                <div class="col-md-4 @if($num > 9) d-none @endif {{ $g->slug ?? '' }}" >
+                                <div class="col-md-4 @if($num > 9) d-none {{ $g->slug ?? '' }} @endif" >
                                     <div class="tab-img"><img src="{{ asset($image->image_path) }}" alt=""></div>
                                 </div>
                                 @endforeach
@@ -48,7 +48,7 @@
                         </div>
                         @if(count($g->images) > 10)
                         <div class="more-ct">
-                          <a href="" class="cta" slug="{{ $g->slug ?? '' }}">View More</a>
+                          <a href="" class="cta view-more" slug="{{ $g->slug ?? '' }}">View More</a>
                         </div>
                         @endif
                     </div>
@@ -63,17 +63,32 @@
         <div class="container">
             <div class="contact-head text-center">
                 <h3>Let's Chat Details And <span class="blue"> Information</span></h3>
-                <p>Leave us your info and we will get back to you </p><a href="#" class="cta">Contact Us</a>
+                <p>Leave us your info and we will get back to you </p><a href="{{ url('contact') }}" class="cta">Contact Us</a>
             </div>
         </div>
     </section>
    
     <script>
         $(document).ready(function(){
-            $('.cta').click(function(e){
+           let status = true;
+            $('.view-more').click(function(e){
                 e.preventDefault();
                 slug = $(this).attr('slug');
-                $('.'+slug).removeClass('d-none')
+                if(status === true){
+                $('.'+slug).removeClass('d-none');
+                $(this).html('View Less');
+                status = false;
+                }else{
+                $('.'+slug).addClass('d-none');
+                status = true;
+                $(this).html('View More');
+                }
+                var targetDiv = $(".images-box");
+            $('html, body').animate({
+                scrollTop: targetDiv.offset().top
+            }, 0);
+                
+   
             })
         })
     </script>
