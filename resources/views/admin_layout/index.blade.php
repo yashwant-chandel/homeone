@@ -14,6 +14,8 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}"> 
+    <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/coustam.css') }}"> 
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 
@@ -292,12 +294,13 @@
         </div>
     </div>
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/example-toastr.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/libs/datatable-btns.js?ver=3.1.2') }}"></script>
+ 
     @if(Session::get('error'))
 <script>
     toastr.clear();

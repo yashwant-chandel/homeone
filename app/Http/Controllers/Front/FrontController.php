@@ -20,10 +20,7 @@ class FrontController extends Controller
     public function exteriors(){
         return view('Front.exteriors');
     }
-    public function shop(){
-        $products = Products::all();
-        return view('Front.shop',compact('products'));
-    }
+  
     public function gallery(){
         $gallery = Gallery::with('images')->get();
       
