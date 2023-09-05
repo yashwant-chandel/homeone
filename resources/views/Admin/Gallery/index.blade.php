@@ -31,8 +31,6 @@
                 </thead>
                 <tbody>
                     @foreach ($gallery as $g )
-                        
-                    
                     <tr class="nk-tb-item">
                         <td class="nk-tb-col nk-tb-col-check">
                             <div class="custom-control custom-control-sm custom-checkbox notext">
