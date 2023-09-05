@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('sale_price');
             $table->string('images');
-            $table->integer('featured_image');
+            $table->string('featured_image');
             $table->text('description');
             $table->text('details');
             $table->timestamps();

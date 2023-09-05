@@ -50,7 +50,7 @@
                               <h6>${{ $product->price ?? '' }}</h6>
                               @endif
                             </div>
-                            <div class="add-cart"><a href="" class="add-btn active">Add To Cart</a><a href="{{ url('store-details') ?? '' }}/{{ $product->slug ?? '' }}" class="more-btn">Learn More</a></div>
+                            <div class="add-cart"><a href="" data-id="{{ $product->id ?? '' }}" class="add-btn active addToCart">Add To Cart</a><a href="{{ url('store-details') ?? '' }}/{{ $product->slug ?? '' }}" class="more-btn">Learn More</a></div>
                         </div>
                     </div>
                 </div>
@@ -66,4 +66,47 @@
             
         </div>
     </section>
+    <!-- Add to cart script -->
+    <script>
+$(document).ready( function(){
+    $('.addToCart').on('click', function(e){
+        e.preventDefault();
+        var product_id = $(this).attr('data-id');
+        console.warn(product_id);
+        var quantity = $("input[type='number']").val();
+        if (quantity === '' || quantity === undefined) {
+            quantity = 1;
+        }
+        $.ajax({
+                method: 'POST',
+                url: '{{ url('addToCart') }}',
+                dataType: 'json',
+                data: {
+                    product_id : product_id,
+                    quantity : quantity,
+                    _token: '{{csrf_token()}}'
+                    },
+                success: function(response) {
+                    console.log(response);
+                    if(response.success){
+                        iziToast.success({
+                            // title: 'DONE',
+                            message: response.success,
+                            position: 'topRight' // Set the position to top right
+                        });
+
+
+                    }else{
+                        iziToast.error({
+                            message: response.error,
+                            position: 'topRight' // Set the position to top right
+                        });
+                        
+                    }
+                }
+
+            });
+    });
+})
+</script>
 @endsection

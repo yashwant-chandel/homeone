@@ -76,11 +76,14 @@
                             <h6><b>Quantity</b></h6>
                         </div>
                         <div class="value_data">
-                            <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-
+                             <div class="value-button decrease" value="Decrease Value">-</div>
+                                <input class="number" type="number" id="number" value="1" maxlength="{{ $product->Quantity ?? '' }}" minlength="1" disabled/>
+                                <div class="value-button increase" value="Increase Value">+</div>
+                            <!-- <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-
                             </div>
-                            <input name="quantity" type="number" id="number" value="1" maxlength="{{ $product->Quantity ?? '' }}" minlength="1"/>
+                            <input name="quantity" class="number" type="number" id="number" value="1" maxlength="{{ $product->Quantity ?? '' }}" minlength="1"/>
                             <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="add-btn submit_cta">
@@ -271,7 +274,7 @@ $(document).ready( function(){
         e.preventDefault();
         var product_id = $(this).attr('data-id');
         console.warn(product_id);
-        var quantity = $("input[name='quantity']").val();
+        var quantity = $("input[type='number']").val();
         if (quantity === '' || quantity === undefined) {
             quantity = 1;
         }
@@ -287,12 +290,18 @@ $(document).ready( function(){
                 success: function(response) {
                     console.log(response);
                     if(response.success){
-                        console.log(response.success);
-                        alert(response[1]);
-                        // NioApp.Toast(response[1], 'info', {position: 'top-right'});
+                        // console.log(response.success);
+                        iziToast.success({
+                            // title: 'DONE',
+                            message: response.success,
+                            position: 'topRight' // Set the position to top right
+                        });
                     }else{
-                        console.log(response.error);
-                        // NioApp.Toast(response[1], 'error', {position: 'top-right'});
+                        iziToast.error({
+                            // title: 'DONE',
+                            message: response.error,
+                            position: 'topRight' // Set the position to top right
+                        });
                     }
                     // NioApp.Toast(response, 'info', {position: 'top-right'});
                     // $("#table").load(location.href + " #table");
