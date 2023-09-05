@@ -34,7 +34,7 @@
                 @foreach($gallery as $g)
                     <div class="tab-pane @if($first == true) active @endif" id="{{ $g->slug ?? '' }}" role="tabpanel">
                     <?php $first = false; ?>    
-                    <div class="images-box">
+                    <div class="images-box images-box{{ $g->slug ?? '' }}">
                             <h5>{{ $g->gallery_title ?? '' }}</h5>
                             <div class="row">
                                 <?php $num = 0; ?>
@@ -83,10 +83,10 @@
                 status = true;
                 $(this).html('View More');
                 }
-                var targetDiv = $(".images-box");
+                var targetDiv = $(".images-box"+slug);
             $('html, body').animate({
                 scrollTop: targetDiv.offset().top
-            }, 0);
+            }, 1000);
                 
    
             })
