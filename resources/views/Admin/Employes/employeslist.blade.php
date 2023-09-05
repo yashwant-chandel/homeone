@@ -1,5 +1,6 @@
 @extends('admin_layout/index')
 @section('content')
+{{ Breadcrumbs::render('Employe-list') }}
 
                         <div class="nk-block nk-block-lg">
                                         <div class="nk-block-head">
@@ -27,9 +28,9 @@
                                                         <th class="tb-tnx-amount is-alt">
                                                             <span class="tb-tnx-total">Registered on</span>
                                                         </th>
-                                                        <!-- <th class="tb-tnx-action">
+                                                        <th class="tb-tnx-action">
                                                             <span>&nbsp;</span>
-                                                        </th> -->
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -53,21 +54,38 @@
                                                                 <span class="amount">{{ $employees->created_at ?? '' }}</span>
                                                             </div>
                                                         </td>
-                                                        <!-- <td class="tb-tnx-action">
+                                                        <td class="tb-tnx-action">
                                                             <div class="dropdown">
                                                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                                     <ul class="link-list-plain">
-                                                                        <li><a href="#">Approve</a></li>
-                                                                        <li><a href="#">Remove</a></li>
+                                                                        <li><a href="{{ url('admin-dashboard/employeregister?id='.$employees->id) }}">Edit</a></li>
+                                                                        <li><a class="remove" link="{{ url('admin-dashboard/deleteemploye/'.$employees->id) }}">Delete</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                        </td> -->
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>
                                         </div><!-- .card-preview -->
                                     </div>
+                                    <script>
+                                    $('.remove').click(function(){
+                                        link = $(this).attr('link');
+                                        Swal.fire({
+                                        title: 'Do you want to delete this event?',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'yes',
+                                        confirmButtonColor: '#008000',
+                                        cancelButtonText: 'no',
+                                        cancelButtonColor: '#d33',
+                                        }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = link;
+                                        } 
+                                        }); 
+                                    });
+                                    </script>
 @endsection

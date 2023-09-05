@@ -53,7 +53,7 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{ url('admin-dashboard/employerequests') }}" class="nk-menu-link"><span class="nk-menu-text">Employees Requests</span></a>
+                                            <a href="{{ url('admin-dashboard/employeregister') }}" class="nk-menu-link"><span class="nk-menu-text">Register Employe</span></a>
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{ url('admin-dashboard/employeeslist') }}" class="nk-menu-link"><span class="nk-menu-text">Employees List</span></a>
@@ -282,7 +282,7 @@
                 <div class="nk-footer">
                     <div class="container-fluid">
                         <div class="nk-footer-wrap">
-                            <div class="nk-footer-copyright"> &copy; 2023 by <a href="{{ url('admin-dashboard') ?? ''}}" target="_blank">eliteserenevillas</a>
+                            <div class="nk-footer-copyright"> &copy; 2023 by <a href="{{ url('admin-dashboard') ?? ''}}" target="_blank">HomeOne</a>
                             </div>
                         </div>
                     </div>
@@ -292,7 +292,7 @@
         </div>
     </div>
     <!-- JavaScript -->
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>

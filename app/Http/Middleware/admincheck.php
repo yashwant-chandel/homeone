@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Auth;
 
-class UserCheck
+class admincheck
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,14 @@ class UserCheck
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            return $next($request);
+            if(Auth::user()->is_admin == 1){
+            return $next($request); 
+            }else{
+                return redirect('/')->with('error','kindly login to open dashboard'); 
+            }
         }else{
-           abort(404);
+            return redirect('/')->with('error','kindly login to open dashboard');
         }
-       
+        
     }
 }

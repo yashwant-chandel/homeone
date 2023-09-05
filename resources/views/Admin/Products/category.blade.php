@@ -1,5 +1,6 @@
 @extends('admin_layout/index')
 @section('content')
+{{ Breadcrumbs::render('Category') }}
 <div class="card card-bordered card-preview d-none" id="addnewcard">
     <div class="card-inner">
         <div class="preview-block">
