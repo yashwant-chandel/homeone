@@ -78,13 +78,13 @@
                         <div class="value_data">
                             <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-
                             </div>
-                            <input type="number" id="number" value="1" maxlength="{{ $product->Quantity ?? '' }}" minlength="1"/>
+                            <input name="quantity" type="number" id="number" value="1" maxlength="{{ $product->Quantity ?? '' }}" minlength="1"/>
                             <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+
                             </div>
                         </div>
 
                         <div class="add-btn submit_cta">
-                            <a href="" class="submit-btn">Add To Cart</a>
+                            <a href="javascript:void(0)" class="submit-btn addToCart" data-id="{{ $product->id ?? '' }}">Add To Cart</a>
                         </div>
 
                     </div>
@@ -265,5 +265,41 @@
         </div>
 
     </section>
+<script>
+$(document).ready( function(){
+    $('.addToCart').on('click', function(e){
+        e.preventDefault();
+        var product_id = $(this).attr('data-id');
+        console.warn(product_id);
+        var quantity = $("input[name='quantity']").val();
+        if (quantity === '' || quantity === undefined) {
+            quantity = 1;
+        }
+        $.ajax({
+                method: 'POST',
+                url: '{{ url('addToCart') }}',
+                dataType: 'json',
+                data: {
+                    product_id : product_id,
+                    quantity : quantity,
+                    _token: '{{csrf_token()}}'
+                    },
+                success: function(response) {
+                    console.log(response);
+                    if(response.success){
+                        console.log(response.success);
+                        alert(response[1]);
+                        // NioApp.Toast(response[1], 'info', {position: 'top-right'});
+                    }else{
+                        console.log(response.error);
+                        // NioApp.Toast(response[1], 'error', {position: 'top-right'});
+                    }
+                    // NioApp.Toast(response, 'info', {position: 'top-right'});
+                    // $("#table").load(location.href + " #table");
+                }
 
+            });
+    });
+})
+</script>
 @endsection

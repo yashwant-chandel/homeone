@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\Front\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,5 +77,9 @@ Route::get('/store-details/{slug}',[ShopController::class,'details']);
 
 Route::get('/shop',[FrontController::class,'shop']);
 Route::get('/gallery',[FrontController::class,'gallery']);
+
+
+// Add To cart
+Route::post('addToCart',[CartController::class,'addToCart']);
 
 
