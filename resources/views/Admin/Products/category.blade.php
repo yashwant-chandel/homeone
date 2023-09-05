@@ -1,6 +1,8 @@
 @extends('admin_layout/index')
 @section('content')
+<div class="d-flex justify-content-end">
 {{ Breadcrumbs::render('Category') }}
+</div>
 <div class="card card-bordered card-preview d-none" id="addnewcard">
     <div class="card-inner">
         <div class="preview-block">

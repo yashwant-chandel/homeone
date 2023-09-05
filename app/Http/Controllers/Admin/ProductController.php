@@ -128,7 +128,7 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Product not found.');
         }
     
-        return view('Admin.Products.update', compact('product','category'));
+        return view('Admin.Products.update', compact('product','category','slug'));
     }
     // function for Product update :
 

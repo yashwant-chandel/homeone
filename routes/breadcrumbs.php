@@ -30,10 +30,27 @@ Breadcrumbs::for('product-add', function (BreadcrumbTrail $trail) {
     $trail->parent('product-list');
     $trail->push('Add', route('products-add'));
 });
-
+Breadcrumbs::for('product-edit', function (BreadcrumbTrail $trail, $slug) {
+    $trail->parent('product-list');
+    $trail->push($slug, route('product-edit',['slug'=>$slug]));
+});
 Breadcrumbs::for('Category', function (BreadcrumbTrail $trail) {
     $trail->parent('product-list');
     $trail->push('Category', route('category'));
+});
+
+//Gallery
+Breadcrumbs::for('gallery', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin-dashboard');
+    $trail->push('Gallery', route('gallery'));
+});
+Breadcrumbs::for('gallery-add', function (BreadcrumbTrail $trail) {
+    $trail->parent('gallery');
+    $trail->push('Add', route('gallery-add'));
+});
+Breadcrumbs::for('gallery-edit', function (BreadcrumbTrail $trail, $slug) {
+    $trail->parent('gallery');
+    $trail->push($slug, route('gallery-edit',['slug'=>$slug]));
 });
 
 ?>

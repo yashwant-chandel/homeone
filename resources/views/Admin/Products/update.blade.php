@@ -1,9 +1,13 @@
 @extends('admin_layout/index')
 @section('content')
+
 <div class="nk-block nk-block-lg">
-    <div class="nk-block-head">
+    <div class="nk-block-head d-flex justify-content-between">
         <div class="nk-block-head-content">
             <h4 class="title nk-block-title">Update Product</h4>   
+        </div>
+        <div>
+        {{ Breadcrumbs::render('product-edit',$slug) }}
         </div>
     </div>
     <div class="card card-bordered">

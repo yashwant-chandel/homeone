@@ -60,7 +60,7 @@ class GalleryController extends Controller
                     return redirect()->back()->with('error', 'Gallery not found.');
                 }
 
-            return view('Admin.Gallery.update',compact('gallery'));
+            return view('Admin.Gallery.update',compact('gallery','slug'));
         }
         return abort(404);
     }
