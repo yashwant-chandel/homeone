@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('product_price');
             $table->integer('product_quantity');
+            $table->integer('subtotal');
             $table->integer('status')->default(0);
             $table->timestamps();
         });

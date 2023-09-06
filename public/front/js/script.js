@@ -103,32 +103,37 @@ $(document).ready(function () {
     $(this).toggleClass("open");
   });
 });
+// Get all elements with the "value-button" class
+var increaseButtons = document.querySelectorAll('.value-button.increase');
+var decreaseButtons = document.querySelectorAll('.value-button.decrease');
 
+// Add click event listeners to all increase buttons
+increaseButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+        var input = this.parentNode.querySelector('.number');
+        var value = parseInt(input.value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        input.value = value;
+    });
+});
 
-
-function increaseValue() {
-  var inputElement = document.getElementById("number");
-  var value = parseInt(inputElement.value, 10);
-  value = isNaN(value) ? 0 : value;
-  
-  // Set the maximum length for the value (e.g., 10 in this case)
-  var maxLength = inputElement.maxLength;
-
-  // Check if the current value plus one exceeds the maximum length
-  if (value + 1 <= maxLength) {
-    value++;
-    inputElement.value = value;
-  }
-}
-
-
-function decreaseValue() {
-  var inputElement = document.getElementById("number");
-  var value = parseInt(inputElement.value, 10);
-  value = isNaN(value) ? 1 : value; // Ensure it's at least 1
-  value = Math.max(1, value - 1); // Decrease value but not below 1
-  inputElement.value = value;
-}
+// Add click event listeners to all decrease buttons
+decreaseButtons.forEach(function (button) {
+  button.addEventListener('click', function () {
+      var input = this.parentNode.querySelector('.number');
+      var value = parseInt(input.value, 10);
+      value = isNaN(value) ? 0 : value;
+      
+      if (value > 1) { // Only decrease if the current value is greater than 1
+          value--;
+      } else {
+          value = 1; // Set the minimum value to 1
+      }
+      
+      input.value = value;
+  });
+});
 
 
 
@@ -141,9 +146,8 @@ $(".slider-for").slick({
   asNavFor: ".slider-nav",
   centerMode: false,
 });
-var imgVal = $('#imgCount').attr('data-val');
 $(".slider-nav").slick({
-  slidesToShow: imgVal,
+  slidesToShow: 8,
   slidesToScroll: 1,
   asNavFor: ".slider-for",
   dots: true,
