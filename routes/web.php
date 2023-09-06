@@ -74,20 +74,22 @@ Route::get('/contact',[FrontController::class,'contact']);
 Route::get('/lawn',[FrontController::class,'lawn']);
 Route::get('/exteriors',[FrontController::class,'exteriors']);
 
-Route::get('/store',[ShopController::class,'index']);
-Route::get('/store-details/{slug}',[ShopController::class,'details']);
+
 
 // Route::get('/shop',[FrontController::class,'shop']);
 Route::get('/gallery',[FrontController::class,'gallery']);
 
 Route::group(['middleware' =>['user']],function(){
-    Route::get('/shop',[FrontController::class,'shop']);
-});
-
+    // Route::get('/shop',[FrontController::class,'shop']);
+    Route::get('/store',[ShopController::class,'index']);
+    Route::get('/store-details/{slug}',[ShopController::class,'details']);
 
 // Add To cart
 Route::post('addToCart',[CartController::class,'addToCart']);
 Route::get('cart',[CartController::class,'index']);
 Route::post('update-cart',[CartController::class,'update']);
 Route::post('remove-cart',[CartController::class,'removeCart']);
+});
+
+
 
