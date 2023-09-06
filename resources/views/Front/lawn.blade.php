@@ -79,7 +79,7 @@
             <div class="contact-head text-center">
                 <h3>Let's Chat Details And Information </h3>
                 <p>Leave us your info and we will get back to you </p>
-                <a href="#" class="cta">Contact Us</a>
+                <a href="{{ url('contact') }}" class="cta">Contact Us</a>
             </div>
         </div>
     </section>

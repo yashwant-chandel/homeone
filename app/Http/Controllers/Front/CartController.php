@@ -13,9 +13,9 @@ class CartController extends Controller
     public function index(Request $request){
         $cart = Cart::with('product')->where('status',0)->where('user_id',Auth::user()->id)->get();
         $subtotalSum = Cart::where('status', 0)->where('user_id', Auth::user()->id)->sum('subtotal');
-        echo '<pre>';
-        print_r($cart);
-        die();
+        // echo '<pre>';
+        // print_r($cart);
+        // die();
         return view('Front.Cart.index',compact('cart','subtotalSum'));
     }
 

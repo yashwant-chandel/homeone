@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Front\CartController;
+use App\Http\Controllers\Admin\AdminSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,7 @@ use App\Http\Controllers\Front\CartController;
 Route::get('/login',[AuthenticationController::class,'index']);
 // Route::get('/register',[AuthenticationController::class,'register']);
 // Route::post('/registerProcc',[AuthenticationController::class,'registerProcc']);
-Route::post('/loginprocc',[AuthenticationController::class,'loginProcc']);
-Route::get('/userloginprocc',[AuthenticationController::class,'userloginProcc']);
+Route::any('/loginprocc',[AuthenticationController::class,'loginProcc']);
 Route::get('/logout',[AuthenticationController::class,'logout']);
 
 
@@ -61,6 +61,11 @@ Route::get('admin-dashboard/gallery',[GalleryController::class,'index'])->name('
 Route::get('admin-dashboard/gallery-edit/{slug}',[GalleryController::class,'editGallery'])->name('gallery-edit');
 Route::post('galleryUpdate',[GalleryController::class,'galleryUpdate']);
 Route::get('gallery-remove/{slug}',[GalleryController::class,'removeGallery']);
+
+
+//AdminAccountSetting
+Route::get('admin-dashboard/setting',[AdminSettingController::class,'index'])->name('account-setting');
+Route::post('admin-dashboard/settingupdate',[AdminSettingController::class,'updateprocc']);
 
 
 });

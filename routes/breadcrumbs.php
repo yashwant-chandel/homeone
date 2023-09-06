@@ -53,4 +53,10 @@ Breadcrumbs::for('gallery-edit', function (BreadcrumbTrail $trail, $slug) {
     $trail->push($slug, route('gallery-edit',['slug'=>$slug]));
 });
 
+//accountsetting 
+Breadcrumbs::for('account-setting', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin-dashboard');
+    $trail->push('Account Setting', route('account-setting'));
+})
+
 ?>
