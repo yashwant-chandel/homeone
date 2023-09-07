@@ -103,38 +103,32 @@ $(document).ready(function () {
     $(this).toggleClass("open");
   });
 });
-// Get all elements with the "value-button" class
-var increaseButtons = document.querySelectorAll('.value-button.increase');
-var decreaseButtons = document.querySelectorAll('.value-button.decrease');
 
-// Add click event listeners to all increase buttons
-increaseButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-        var input = this.parentNode.querySelector('.number');
-        var value = parseInt(input.value, 10);
-        value = isNaN(value) ? 0 : value;
-        value++;
-        input.value = value;
-    });
+
+
+// Use delegated event handling for increase buttons
+$("body").on("click", ".value-button.increase", function () {
+  var input = $(this).closest('.value_data').find('.number');
+  var value = parseInt(input.val(), 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  input.val(value);
 });
 
-// Add click event listeners to all decrease buttons
-decreaseButtons.forEach(function (button) {
-  button.addEventListener('click', function () {
-      var input = this.parentNode.querySelector('.number');
-      var value = parseInt(input.value, 10);
-      value = isNaN(value) ? 0 : value;
-      
-      if (value > 1) { // Only decrease if the current value is greater than 1
-          value--;
-      } else {
-          value = 1; // Set the minimum value to 1
-      }
-      
-      input.value = value;
-  });
-});
+// Use delegated event handling for decrease buttons
+$("body").on("click", ".value-button.decrease", function () {
+  var input = $(this).closest('.value_data').find('.number');
+  var value = parseInt(input.val(), 10);
+  value = isNaN(value) ? 0 : value;
 
+  if (value > 1) {
+      value--;
+  } else {
+      value = 1;
+  }
+
+  input.val(value);
+});
 
 
 $(".slider-for").slick({

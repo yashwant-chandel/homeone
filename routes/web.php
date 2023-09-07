@@ -11,6 +11,8 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Front\CheckoutController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +101,10 @@ Route::post('addToCart',[CartController::class,'addToCart']);
 Route::get('cart',[CartController::class,'index']);
 Route::post('update-cart',[CartController::class,'update']);
 Route::post('remove-cart',[CartController::class,'removeCart']);
+
+Route::get('checkout',[CheckoutController::class,'index']);
+
+Route::post('checkoutpayment',[CheckoutController::class,'checkout']);
 });
 
 

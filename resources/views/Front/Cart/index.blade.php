@@ -110,7 +110,7 @@
                     </div>
                   </div>
                   <div class="Checkout-btn">
-                      <a href="#" class="cta">Proceed to Checkout</a>
+                      <a href="{{ url('checkout') ?? ''}}" class="cta">Proceed to Checkout</a>
                     
                 </div>
                 </div>
@@ -127,73 +127,85 @@
                 </div>
             </div>
             <div class="row">
+                @foreach ($relatedProducts as $related)
+                 
                 <div class="col-lg-4 col-md-6">
                     <div class="box-products">
-                        <div class="products-img"><img src="{{ url('front/img/products1.png') ?? '' }}" alt=""></div>
+                        <div class="products-img"><img src="{{ url('productIMG') ?? '' }}/{{ $related['featured_image'] ?? '' }}" alt=""></div>
                         <div class="products-data">
                             <div class="products-name">
-                                <h4>Product Name<sup>TM</sup></h4>
-                                <p>Lorem Ipsum has been the industry's</p>
+                                <h4>{{ $related['product_name'] ?? '' }}</h4>
+                                <p><?php print_r($related['short_note']) ?></p>
                             </div>
                             <div class="products-star"><i class="fa-sharp fa-solid fa-star"></i><i
                                     class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i
                                     class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
                             </div>
                             <div class="products-price">
-                                <h6>$49.95 <span>$65.99</span></h6>
+                                <h6>${{ $related['sale_price'] ?? '' }}<span>${{ $related['price'] ?? '' }}</span></h6>
                             </div>
-                            <div class="add-cart"><a href="" class="add-btn active">Add To Cart</a><a href=""
-                                    class="more-btn">Learn More</a></div>
+                            <div class="add-cart">
+                                <a href="" data-id="{{ $related['id'] ?? '' }}" class="add-btn active addToCart">Add To Cart</a>
+                                <a href="{{ url('store-details') ?? '' }}/{{ $related['slug'] ?? '' }}" class="more-btn">Learn More</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="box-products">
-                        <div class="products-img"><img src="{{ url('front/img/products2.png') ?? '' }}" alt=""></div>
-                        <div class="products-data">
-                            <div class="products-name">
-                                <h4>Product Name<sup>TM</sup></h4>
-                                <p>Lorem Ipsum has been the industry's</p>
-                            </div>
-                            <div class="products-star"><i class="fa-sharp fa-solid fa-star"></i><i
-                                    class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i
-                                    class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
-                            </div>
-                            <div class="products-price">
-                                <h6>$49.95 <span>$65.99</span></h6>
-                            </div>
-                            <div class="add-cart"><a href="" class="add-btn">Add To Cart</a><a href=""
-                                    class="more-btn">Learn More</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="box-products">
-                        <div class="products-img"><img src="{{ url('front/img/products3.png') ?? '' }}" alt=""></div>
-                        <div class="products-data">
-                            <div class="products-name">
-                                <h4>Product Name<sup>TM</sup></h4>
-                                <p>Lorem Ipsum has been the industry's</p>
-                            </div>
-                            <div class="products-star"><i class="fa-sharp fa-solid fa-star"></i><i
-                                    class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i
-                                    class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
-                            </div>
-                            <div class="products-price">
-                                <h6>$49.95 <span>$65.99</span></h6>
-                            </div>
-                            <div class="add-cart"><a href="" class="add-btn">Add To Cart</a><a href=""
-                                    class="more-btn">Learn More</a></div>
-                        </div>
-                    </div>
-                </div>
+                   
+                @endforeach
             </div>
                 </div>
     </section>
+  <!-- Add to cart script -->
+  <script>
+$(document).ready( function(){
+    $("body").delegate(".addToCart", "click", function(e) {
+    // $('.addToCart').on('click', function(e){
+        e.preventDefault();
+        var product_id = $(this).attr('data-id');
+        console.warn(product_id);
+        var quantity = 1;
+        if (quantity === '' || quantity === undefined) {
+            quantity = 1;
+        }
+        $.ajax({
+                method: 'POST',
+                url: '{{ url('addToCart') }}',
+                dataType: 'json',
+                data: {
+                    product_id : product_id,
+                    quantity : quantity,
+                    _token: '{{csrf_token()}}'
+                    },
+                success: function(response) {
+                    console.log(response);
+                    if(response.success){
+                        iziToast.success({
+                            // title: 'DONE',
+                            message: response.success,
+                            position: 'topRight' // Set the position to top right
+                        });
+                        $(".tableTotal").load(location.href + " .tableTotal");
+                        $(".product-table").load(location.href + " .product-table");
 
+                    }else{
+                        iziToast.error({
+                            message: response.error,
+                            position: 'topRight' // Set the position to top right
+                        });
+                        
+                    }
+                }
+
+            });
+    });
+})
+</script>
+<!-- end add to cart -->
 <script>
    $(document).ready(function(){
-        $('.updateCart').on('click', function(){
+    $("body").delegate(".updateCart", "click", function(e) {
+        // $('.updateCart').on('click', function(){
             const cartItems = [];
             const quantityInputs = document.querySelectorAll('.number');
         
@@ -214,13 +226,12 @@
                     },
                 success: function(response) {
                     if(response.success){
-                        setTimeout(function() {
-                            iziToast.error({
+                            iziToast.success({
                                 message: response.success,
                                 position: 'topRight'
                             });
-                            location.reload();
-                        }, 2000);
+                        $(".tableTotal").load(location.href + " .tableTotal");
+                        $(".product-table").load(location.href + " .product-table");
                         // window.location.reload();
                     }else{
                         alert(response.error);
@@ -236,7 +247,8 @@
 </script>
 <script>
     $(document).ready(function(){
-        $('.removeItem').on('click',function(){
+        $("body").delegate(".removeItem", "click", function(e) {
+        // $('.removeItem').on('click',function(){
             // console.warn($(this).attr('data-id'));
             var product_id = $(this).attr('data-id');
             // console.warn(product_id);
@@ -277,7 +289,8 @@
 </script>
 <script>
     $(document).ready(function(){
-        $('.removeAll').on('click',function(){
+    $("body").delegate(".removeAll", "click", function(e) {
+        // $('.removeAll').on('click',function(){
             $.ajax({
                 method: 'POST',
                 url: '{{ url('remove-cart') }}',
@@ -289,13 +302,15 @@
                 success: function(response) {
                     // console.log(response);
                     if(response.success){
-                        setTimeout(function() {
-                            iziToast.error({
+                        // setTimeout(function() {
+                            iziToast.success({
                                 message: response.success,
                                 position: 'topRight'
-                            });
-                            location.reload();
-                        }, 2000);
+                            // });
+                            // location.reload();
+                        });
+                        $(".tableTotal").load(location.href + " .tableTotal");
+                        $(".product-table").load(location.href + " .product-table");
                         // window.location.reload();
                         console.log(response.success);
                     }else{
