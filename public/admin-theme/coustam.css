@@ -38,3 +38,6 @@
     cursor:pointer;
     margin-left:10px;
   }
+  th.tb-odr-info.d-flex.justify-content-between.pr-5 {
+    padding-right: 170px;
+}

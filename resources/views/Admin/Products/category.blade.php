@@ -197,7 +197,7 @@ $(document).ready(function(){
                     _token: '{{csrf_token()}}'
                 },
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
                     NioApp.Toast(response, 'info', {position: 'top-right'});
                     $("#table").load(location.href + " #table");
                 }

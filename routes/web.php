@@ -72,7 +72,8 @@ Route::post('admin-dashboard/settingupdate',[AdminSettingController::class,'upda
 
 //orderes
 Route::get('admin-dashboard/orders',[OrdersController::class,'index'])->name('order-list');
-Route::get('admin-dashboard/orderview/{orderid}',[OrdersController::class,'orderview'])->name('order-view');
+// Route::get('admin-dashboard/orderview/{orderid}',[OrdersController::class,'orderview'])->name('order-view');
+Route::post('admin-dashboard/orderupdate',[OrdersController::class,'orderupdate'])->name('order-update');
 
 
 });
