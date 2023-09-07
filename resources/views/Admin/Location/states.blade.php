@@ -1,13 +1,10 @@
 @extends('admin_layout/index')
 @section('content')
-<div class="d-flex justify-content-between">
-{{ Breadcrumbs::render('Category') }}
-</div>
 <div class="card card-bordered card-preview d-none" id="addnewcard">
     <div class="card-inner">
         <div class="preview-block">
             <div class="d-flex justify-content-between">
-                <span class="preview-title-lg overline-title">Add Category</span>
+                <span class="preview-title-lg overline-title">Add States</span>
                 <span class="close"><i class="fas fa-times"></i></span>
             </div>
             <div class="row gy-4">
@@ -15,25 +12,27 @@
                     <form action=""  id="form-data">
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" value="">
-                            <label class="form-label" for="name">Category Name</label>
+                            <label class="form-label" for="state_name">State Name</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" name="name" id="name"
-                                    placeholder="Catgory name">
+                                <input type="text" class="form-control" name="state_name" id="state_name"
+                                    placeholder="State name">
                             </div>
                         </div>
-                       <div class="form-group">
-                             <label class="form-label" for="slug">Slug</label>
-                            <div class="form-control-wrap">
-                                <input type="text" class="form-control" name="slug" id="slug"
-                                    placeholder="Category slug">
+                        
+                        <div class="form-group">
+                            <label class="form-label">Country</label>
+                            <div class="form-control-wrap ">
+                                <select class="form-select js-select22 " id="country_id" name="country_id" data-placeholder="Select a Country" required>
+                                    @foreach ($countries as $country)
+                                        <option class="form-control country_{{ $country->id ?? '' }}" value="{{ $country->id ?? '' }} ">{{ $country->country_name ?? ''}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                        </div> 
-
+                        </div>
                         <div class="form-group">
                             <button type="button" class="btn btn-primary add" id="add"><span id="button_value">Add</span></button>
                             <button type="button" class="btn btn-primary  add-new d-none" id="add_new"><span >Add New</span></button>
-                            
-                        
+                                         
                         </div>
                 </div>
                 </form>
@@ -42,10 +41,13 @@
         </div>
     </div>
 </div>
+
+
+
 <div class="nk-block nk-block-lg my-4">
     <div class="nk-block-head">
         <div class="nk-block-head-content d-flex justify-content-between">
-            <h4 class="nk-block-title">Categories</h4>
+            <h4 class="nk-block-title">States</h4>
             <button class="btn btn-primary" id="addnew">Add New</button>
         </div>
     </div>
@@ -56,12 +58,12 @@
                     <th class="tb-tnx-id"><span class="">#</span></th>
                     <th class="tb-tnx-info">
                         <span class="tb-tnx-desc d-none d-sm-inline-block">
-                            <span>Category Name</span>
+                            <span>State Name</span>
                         </span>
                     </th>
                     <th class="tb-tnx-info">
                         <span class="tb-tnx-desc d-none d-sm-inline-block">
-                            <span>Category Slug</span>
+                            <span>Country</span>
                         </span>
                     </th>
                     <th class="tb-tnx-action">
@@ -70,19 +72,19 @@
                 </tr>
             </thead>
             <tbody>     <?php $a = 1; ?>
-    @foreach($category as $cat)
+    @foreach($states as $state)
         <tr class="tb-tnx-item">
             <td class="tb-tnx-id">
                 <a href="#"><span>{{ $a++ ?? ''}}</span></a>
             </td>
             <td class="tb-tnx-info">
                 <div class="tb-tnx-desc">
-                    <input type="text" data-id="{{ $cat->id ?? '' }}" class="titleName name{{ $cat->id ?? '' }}" value="{{ $cat->name ?? ''}}"  disabled style="border: none; background: transparent;" />
+                    <input type="text" data-id="{{ $state->id ?? '' }}" class="titleName name{{ $state->id ?? '' }}" value="{{ $state->state_name ?? ''}}"  disabled style="border: none; background: transparent;" />
                 </div>
             </td>
             <td class="tb-tnx-info">
                 <div class="tb-tnx-desc">
-                    <input type="text" data-id="{{ $cat->slug ?? '' }}" class="titleName name{{ $cat->slug ?? '' }}" value="{{ $cat->slug ?? ''}}"  disabled style="border: none; background: transparent;" />
+                    <input type="text" data-id="{{ $state->country_id ?? '' }}" class="titleName name{{ $state->country_id ?? '' }}" value="{{ $state->country->country_name ?? ''}}"  disabled style="border: none; background: transparent;" />
                 </div>
             </td>
           
@@ -92,8 +94,8 @@
                             class="icon ni ni-more-h"></em></a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                         <ul class="link-list-plain">
-                            <li><a href="#" data-id ="{{$cat->id ?? ''  }}"data-name = "{{ $cat->name ?? '' }}" data-slug ="{{ $cat->slug ?? '' }}" class="edit-category" >Edit</a></li>
-                            <li><a href="#" data-id ="{{$cat->id ?? ''  }}"  class="remove-category" >Remove</a></li>
+                            <li><a href="#" data-id ="{{$state->id ?? ''  }}" data-state_name="{{ $state->state_name ?? '' }}" data-country_id="{{ $state->country_id ?? '' }}" class="edit-state" >Edit</a></li>
+                            <li><a href="#" data-id ="{{$state->id ?? ''  }}"  class="remove-state" >Remove</a></li>
                         </ul>
                     </div>
                 </div> 
@@ -105,42 +107,37 @@
         </table>
     </div><!-- .card-preview -->
 </div>
-<script>
 
+<!-- Script Area -->
+<script>
 $(document).ready(function(){
-        $('#name').on('keyup',function(){
-            let name = $(this).val().toLowerCase();
-            let slug = name.replace(/ /g, "-");
-           $('#slug').val(slug);
-        });
-    });
-    
     $("body").delegate(".add", "click", function(e) {
-        var name = $('#name').val();
-        var slug = $('#slug').val();
+        var state_name = $('#state_name').val();
+        var country_id = $('#country_id').val();
         var id = $('#id').val();
         // return false;
-        if (name === '' || slug === '') {
+        if (state_name === '' || country_id === '') {
             NioApp.Toast('Fields cannot be null', 'info', {position: 'top-right'});
             return false;
         }
+
         $.ajax({
             method: 'POST',
-            url: '{{ url('admin-dashboard/categoriesadd') }}',
+            url: '{{ url('addState') }}',
             dataType: 'json',
             data: {
-                    name : name,
-                    slug : slug,
+                state_name : state_name,
+                country_id : country_id,
                     id : id,
                     _token: '{{csrf_token()}}',
                 },
             success: function(response) {
                 console.log(response);
                     $('#id').val('');
-                    $('#name').val('');
-                    $('#slug').val('');
-                    $('.add-new').addClass('d-none');
-                    $('#button_value').html('Add');
+                    $('#state_name').val('');
+                    // $('#country_id').val('');
+                    // $('.add-new').addClass('d-none');
+                    // $('#button_value').html('Add');
                 NioApp.Toast(response, 'info', {position: 'top-right'});
                 $("#table").load(location.href + " #table");
             },
@@ -162,42 +159,46 @@ $(document).ready(function(){
         });
    
     });
-$(document).ready(function() {
-    $("body").delegate(".edit-category", "click", function (e) {
+
+
+    $("body").delegate(".edit-state", "click", function (e) {
         $('#addnewcard').removeClass('d-none');
         $('#addnew').hide();
             id = $(this).attr('data-id');
-            name = $(this).attr('data-name');
-            slug = $(this).attr('data-slug');
+            state_name = $(this).attr('data-state_name');
+            country_id = $(this).attr('data-country_id');
             $('#id').val(id);
-            $('#name').val(name);
-            $('#slug').val(slug);
+            $('#state_name').val(state_name);
+            $('.country_' + country_id).prop('selected', true);
+
+           
+
           $('#button_value').html('update');
           $('#add_new').removeClass('d-none');
           window.scrollTo(0, 0);
             
     });
+
     $("body").delegate(".add-new", "click", function (e) {
             $('#id').val('');
-            $('#name').val('');
-            $('#slug').val('');
+            $('#state_name').val('');
+            // $('#country_id').val('');
             $(this).addClass('d-none');
-            $('#button_value').html('Add');
-            
-            
+            $('#button_value').html('Add');    
     });
-    $("body").delegate(".remove-category", "click", function (e) {
+
+    $("body").delegate(".remove-state", "click", function (e) {
             id = $(this).attr('data-id');
             $.ajax({
             method: 'POST',
-            url: '{{ url('catgoriesdelete') }}',
+            url: '{{ url('state-delete') }}',
             dataType: 'json',
             data: {
                     id : id,
                     _token: '{{csrf_token()}}'
                 },
                 success: function(response) {
-                    // console.log(response);
+                    console.log(response);
                     NioApp.Toast(response, 'info', {position: 'top-right'});
                     $("#table").load(location.href + " #table");
                 }
@@ -205,7 +206,8 @@ $(document).ready(function() {
 
         });
     });
-});
+
+});    
 </script>
 <script>
     $('#addnew').click(function(){
@@ -218,5 +220,4 @@ $(document).ready(function() {
             $('#addnew').show();
         });
 </script>
-
 @endsection

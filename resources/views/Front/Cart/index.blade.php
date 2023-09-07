@@ -95,15 +95,15 @@
                           </tr>
                           <tr>
                             <td data-th="Shipping" class="cart-custom">Shipping  </td>
-                            <td data-th="Shipping" class="cart-detail cart-custom">$10</td>
+                            <td data-th="Shipping" class="cart-detail cart-custom">$0</td>
                           </tr>
                           <tr>
                             <td data-th="Taxes" class="cart-custom">Tax</td>
-                            <td data-th="Taxes" class="cart-detail cart-custom">$15</td>
+                            <td data-th="Taxes" class="cart-detail cart-custom">$0</td>
                           </tr>
                           <tr>
                             <td data-th="data" class="total-data">Order Total Incl. Tax</td>
-                            <td data-th="Total" class="total-data cart-detail ">$124.90</td>
+                            <td data-th="Total" class="total-data cart-detail ">${{ $subtotalSum ?? '' }}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -234,9 +234,11 @@ $(document).ready( function(){
                         $(".product-table").load(location.href + " .product-table");
                         // window.location.reload();
                     }else{
-                        alert(response.error);
-                        console.log(response.error);
-                        // NioApp.Toast(response[1], 'error', {position: 'top-right'});
+                        iziToast.error({
+                                message: response.error,
+                                position: 'topRight'
+                            });
+                      
                     }
                    
                 }

@@ -48,12 +48,18 @@
                                         @error('last_name')
                                             <div class="text-danger error">{{ $message }}</div>
                                         @enderror
-                                        <select name="country" >
+                                        <select name="country" class="country">
                                             <option  selected disabled >Country / Region</option>
-                                            <option value="US">US</option>
-                                            <option value="IND">IND</option>
+                                            @foreach ($locations as $location )
+                                                <option data-id="{{ $location->id ?? '' }}" value="{{ $location->country_code ?? '' }}">{{ $location->country_name ?? '' }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
+                                    @foreach ($locations as $location)
+                                        @foreach ($location->states as $state)
+                                            <input type="hidden" class="state_{{ $location->country_code ?? '' }}" state-name="{{ $state->state_name ?? '' }}" />
+                                        @endforeach
+                                    @endforeach
                                     <div class="form-group">
                                         @error('street')
                                             <div class="text-danger error">{{ $message }}</div>
@@ -70,10 +76,8 @@
                                         @error('state')
                                             <div class="text-danger error">{{ $message }}</div>
                                         @enderror
-                                        <select name="state">
+                                        <select name="state" id="state">
                                             <option selected disabled >State</option>
-                                            <option value="San Francisco">San Francisco</option>
-                                            <option value="New York"> New York</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -157,7 +161,7 @@
                                                 <!-- <a href="" class="place">place order</a> -->
                                                 <input type="hidden" name="token" id="token" />
                                                 <input type="hidden" name="amount" value="{{ $total_amount }}">
-                                                <button type="submit" class="btn-main btn btn-primary pay-with-btn btn-lg" id="card-button" data-secret="{{ $client_secret }}">Pay
+                                                <button type="submit" class="place btn  pay-with-btn " id="card-button" data-secret="{{ $client_secret }}">Pay
                                                 Now</button>
                                             </div>
                                         </div>
@@ -233,6 +237,33 @@
             </div>
         </div>
     </section>
+    <script>
+    $(document).ready(function () {
+        $("body").delegate(".country", "change", function (e) {
+            var code = $(this).val();
+            var states = []; // Create an array to store states
+            console.log(states);
+            // Iterate through hidden inputs with class state_<country_code>
+            $('.state_' + code).each(function () {
+                var stateName = $(this).attr('state-name');
+                states.push(stateName); // Store state in the array
+            });
+
+            // Clear the existing options in the state select
+            $('#state').empty();
+
+            // Add new options for the selected states
+            $.each(states, function (index, state) {
+                $('#state').append($('<option>', {
+                    value: state,
+                    text: state
+                }));
+            });
+        });
+    });
+</script>
+
+    
     <script>
         $(document).ready(function() {
             var productData = {};

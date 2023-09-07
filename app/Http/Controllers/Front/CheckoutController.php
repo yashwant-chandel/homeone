@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{ Products,Cart,Order,Payment,Address};
+use App\Models\{ Countries,States,Products,Cart,Order,Payment,Address};
 use Illuminate\Support\Str;
 
 use App\Mail\OrderMail;
@@ -21,18 +21,26 @@ class CheckoutController extends Controller
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $setupIntent = SetupIntent::create();
-
-        $client_secret = $setupIntent->client_secret;
         $cart = Cart::with('product')->where('status', 0)->where('user_id', Auth::user()->id)->get();
+
         $total_amount = Cart::where('status', 0)->where('user_id', Auth::user()->id)->sum('subtotal');
 
-        return view('Front.Checkout.index',compact('client_secret','total_amount','cart'));
+        if ($cart->isEmpty()) {
+            return redirect()->back()->with('error','Cart Is empty nothing to checkout '); 
+        }
+
+        $setupIntent = SetupIntent::create();
+        $client_secret = $setupIntent->client_secret;
+        $locations = Countries::with('states')->get();
+        // echo '<pre>';
+        // print_r($locations);
+        // die();
+        return view('Front.Checkout.index', compact('client_secret', 'total_amount', 'cart','locations'));
     }
+
     public function checkout(Request $request)
     {
-        // echo '<pre>';
-   
+        
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -88,12 +96,14 @@ class CheckoutController extends Controller
                 // Check the payment intent status to determine success or error
                 if ($stripePaymentIntent->status === 'succeeded') {
 
-                    $orderNum = 'ORD_' . now()->format('YmdHis') . '_' . Str::random(4);
-                    
+                    $latestOrderId = Order::latest('id')->value('id') ?? 0;
+                    $orderNum = $latestOrderId . substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 7);
+
                     /* create order */
                     foreach (json_decode($request->products) as $qty => $p_id) {
                         $product = Products::where('id', $p_id)->first();
-
+                        $product->Quantity = $product->Quantity - $qty;
+                        $product->save();
                         /*Update cart item   status*/
                         $cartstatus = Cart::where('status', 0)
                             ->where('user_id', Auth::user()->id)
@@ -122,6 +132,8 @@ class CheckoutController extends Controller
                     /* add payment */
                     $payment = new Payment;
                     $payment->order_num = $orderNum;
+                    $payment->email = $request->email;
+                    $payment->phone = $request->phone;
                     $payment->payment_intent = $stripePaymentIntent->id;
                     $payment->stripe_customer_id = $customer->id;
                     $payment->total_amount = $request->amount;

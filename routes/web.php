@@ -11,6 +11,7 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Front\CheckoutController;
 
 
@@ -75,6 +76,15 @@ Route::get('admin-dashboard/orders',[OrdersController::class,'index'])->name('or
 // Route::get('admin-dashboard/orderview/{orderid}',[OrdersController::class,'orderview'])->name('order-view');
 Route::post('admin-dashboard/orderupdate',[OrdersController::class,'orderupdate'])->name('order-update');
 
+
+// Location controller 
+Route::get('admin-dashboard/countries',[LocationController::class,'countries']);
+Route::post('addCountry',[LocationController::class,'addCountry']);
+Route::post('country-delete',[LocationController::class,'removeCountry']);
+
+Route::get('admin-dashboard/states',[LocationController::class,'states']);
+Route::post('addState',[LocationController::class,'addState']);
+Route::post('state-delete',[LocationController::class,'removeState']);
 
 });
 
