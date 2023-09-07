@@ -32,7 +32,7 @@ class AdminSettingController extends Controller
     $admin->password = $request->password;
     }
     $admin->update();
-    return redirect()->back()->with(['success'=>'Successfully updated ']);
+    return redirect()->back()->with(['success'=>'Successfully updated']);
    }
 
 }

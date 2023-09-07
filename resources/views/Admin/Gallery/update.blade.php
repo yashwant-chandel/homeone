@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="images">Upload Featured Images</label>
+                            <label class="form-label" for="images">Upload Featured Image</label>
                             <sup>@error('featured_image')
                                     <div class="error text-danger">{{ $message }}</div>
                                 @enderror</sup>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row my-3">
+                    <!-- <div class="row my-3"> -->
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-label" for="images">Upload Gallery Images</label>
@@ -67,15 +67,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex">
-                         
-                            
+                    <div class="col-md-6"> 
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-lg btn-primary">Update Gallery</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
                             <div class="image-row" style="display: flex; flex-wrap: wrap;gap: 1rem;">
                                 @foreach ($gallery->images as $image)
                                 <input type="hidden" name="oldImg[]" value="{{ $image->id ?? '' }}">
                                     <div class="image-container" style="position: relative;margin-right: 1rem;">
                                         <i data-id="{{ $img->id ?? '' }}" class="fas fa-trash-alt text-danger remove-image" style="position: absolute; cursor: pointer;"></i>
-                                        <img class="image-fluid" style="max-width: 10rem" src="{{ url('galleryIMG', $image->image_name) }}" alt="">
+                                        <img class="image-fluid" style="max-width: 5rem" src="{{ url('galleryIMG', $image->image_name) }}" alt="">
                                         <input type="hidden" name="existing_images[]" value="{{ $image->id }}">
                                     </div>
                                 @endforeach
@@ -83,11 +86,6 @@
                         </div>
 
                     </div>
-                    </div>
-                    <div class="col-md-12 mt-3">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-lg btn-primary">Update Gallery</button>
-                        </div>
                     </div>
                 </div>
             </form>

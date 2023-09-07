@@ -10,6 +10,7 @@ use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,10 @@ Route::get('gallery-remove/{slug}',[GalleryController::class,'removeGallery']);
 //AdminAccountSetting
 Route::get('admin-dashboard/setting',[AdminSettingController::class,'index'])->name('account-setting');
 Route::post('admin-dashboard/settingupdate',[AdminSettingController::class,'updateprocc']);
+
+//orderes
+Route::get('admin-dashboard/orders',[OrdersController::class,'index'])->name('order-list');
+Route::get('admin-dashboard/orderview/{orderid}',[OrdersController::class,'orderview'])->name('order-view');
 
 
 });

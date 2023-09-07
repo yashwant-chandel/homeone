@@ -101,7 +101,7 @@
                     
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="featured_image">Featured Image Upload</label>
+                            <label class="form-label" for="featured_image">Upload Featured Image</label>
                             <sup>@error('featured_image')
                                 <div class="error text-danger">{{ $message }}</div>
                             @enderror</sup>

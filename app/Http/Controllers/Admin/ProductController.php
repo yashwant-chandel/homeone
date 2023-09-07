@@ -158,7 +158,7 @@ class ProductController extends Controller
                 $product->details = $request->details;
                 $product->sale_price = $request->sale_price;
         
-         
+                $existingImg = [];
                 $oldImg = json_decode($request->oldImg);
                 $existingImg = $request->existing_images;
 
@@ -188,9 +188,13 @@ class ProductController extends Controller
                     $featuredImage->move(public_path('productIMG'), $featuredImageName);
                     $product->featured_image = $featuredImageName;
                 }
-        
-                $imageNames = $this->uploadImages($request);
+              
+                $imageNames = $this->uploadImages($request); 
+                if(empty($existingImg)){
+                $updatedImageIds = $imageNames;
+                }else{
                 $updatedImageIds = array_merge($existingImg, $imageNames);
+                }
                 $product->images = json_encode($updatedImageIds);
 
 

@@ -65,9 +65,8 @@ class GalleryController extends Controller
         return abort(404);
     }
 
-    public function galleryUpdate(Request $request){
-        
-            if ($request->has('existing_images') || $request->hasFile('images')) {
+    public function galleryUpdate(Request $request){       
+            // if ($request->has('existing_images') || $request->hasFile('images')) {
 
             if ($request->id) {
                 $request->validate([
@@ -88,16 +87,17 @@ class GalleryController extends Controller
                     } else {
                         $removedImages = $oldImg;
                     }
-
-                    foreach ($removedImages as $remove) {
-                        $deleteImg = Media::where('id', $remove)->first();
-                        
-                        if ($deleteImg) {
-                            $image_path = public_path('galleryIMG/' . $deleteImg->image_name);
+                    if($removedImages){
+                        foreach ($removedImages as $remove) {
+                            $deleteImg = Media::where('id', $remove)->first();
                             
-                            if (File::exists($image_path)) {
-                                File::delete($image_path);
-                                $deleteImg->delete();
+                            if ($deleteImg) {
+                                $image_path = public_path('galleryIMG/' . $deleteImg->image_name);
+                                
+                                if (File::exists($image_path)) {
+                                    File::delete($image_path);
+                                    $deleteImg->delete();
+                                }
                             }
                         }
                     }
@@ -115,9 +115,9 @@ class GalleryController extends Controller
 
                     return redirect('admin-dashboard/gallery-edit/' . $request->slug)->with('success','Gallery has been updated');
                 
-                }else{
-                    return redirect()->back()->with('error','Failed to update gallery not found !');
-                }
+                // }else{
+                //     return redirect()->back()->with('error','Failed to update gallery not found !');
+                // }
              
         }
                 

@@ -15,7 +15,8 @@ class UserController extends Controller
    public function index(Request $request){
     // $requests = User::where([['is_admin',0],['is_approved',0]])->get();
     // return view('Admin.Employes.employerequests',compact('requests'));
-    $user = User::find($request->id);
+    $user = User::where([['id',$request->id],['is_admin',0],['is_approved',1]])->first();
+    
     return view('Admin.Employes.registeremploye',compact('user'));
    }
    public function list(){
@@ -46,9 +47,6 @@ class UserController extends Controller
 
 public function registerProcc(Request $request){
     if($request->id){
-        echo '<pre>';
-        print_r($request->all());
-        echo '</pre>';
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email,'.$request->id,
