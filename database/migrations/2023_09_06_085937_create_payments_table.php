@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('order_num');
+            $table->string('email');
+            $table->string('phone');
             $table->string('payment_intent');
             $table->string('stripe_customer_id');
             $table->string('total_amount');

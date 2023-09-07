@@ -99,32 +99,20 @@
                                         <span class="nk-menu-text">Orders</span>
                                     </a>
                                 </li>
-                                <!-- <li class="nk-menu-item has-sub">
+                                <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                                        <span class="nk-menu-text">User Manage</span>
+                                        <span class="nk-menu-icon"><i class="icon fas fa-globe"></i></em></span>
+                                        <span class="nk-menu-text">Country-State</span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/users-list')}}" class="nk-menu-link"><span class="nk-menu-text">User List - Designer</span></a>
+                                            <a href="{{ url('admin-dashboard/countries') }}" class="nk-menu-link"><span class="nk-menu-text">Countries</span></a>
                                         </li>
-
-                                    </ul>
-                                </li> -->
-                                <!-- <li class="nk-menu-item has-sub">
-                                    <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><i class="fas fa-network-wired"></i></span>
-                                        <span class="nk-menu-text">Genre</span>
-                                    </a>
-                                    <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/genre')}}" class="nk-menu-link"><span class="nk-menu-text">Genre List</span></a>
+                                            <a href="{{ url('admin-dashboard/states') }}" class="nk-menu-link"><span class="nk-menu-text">States</span></a>
                                         </li>
-
                                     </ul>
-                                </li> -->
-                               
-                             
+                                </li>
                             </ul>
                         </div>
                     </div>

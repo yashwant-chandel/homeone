@@ -1017,7 +1017,7 @@ form.pay_card_form label {
     padding-top: 50px;
 }
 
-.checkbox-button a {
+.checkbox-button button {
     border-radius: 5px;
     border: 1px solid #000ABC;
     background: #000ABC;

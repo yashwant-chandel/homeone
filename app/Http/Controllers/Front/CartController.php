@@ -44,7 +44,7 @@ class CartController extends Controller
         if (!$product) {
             return response()->json(['error' => 'Failed to find product']);
         }
-        if (Cart::where('status', '=', 0)->where('product_id',$request->product_id)->exists()) {
+        if (Cart::where('status', '=', 0)->where('product_id',$request->product_id)->where('user_id',Auth::user()->id)->exists()) {
             $cart = Cart::where('product_id', $request->product_id)->where('status', 0)->first();
             if ($cart) {
                 $cart->product_quantity += $request->quantity;
