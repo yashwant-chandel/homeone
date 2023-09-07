@@ -11,14 +11,33 @@ class CartController extends Controller
 {
 
     public function index(Request $request){
-        $cart = Cart::with('product')->where('status',0)->where('user_id',Auth::user()->id)->get();
-        $subtotalSum = Cart::where('status', 0)->where('user_id', Auth::user()->id)->sum('subtotal');
-        echo '<pre>';
-        print_r($cart);
-        die();
-        return view('Front.Cart.index',compact('cart','subtotalSum'));
-    }
+        $userId = Auth::user()->id;
+    
+        // Fetch the user's cart items
+        $cart = Cart::with('product')->where('status', 0)->where('user_id', $userId)->get();
+    
+        // Calculate the subtotal
+        $subtotalSum = Cart::where('status', 0)->where('user_id', $userId)->sum('subtotal');
+    
+        // Get the category IDs of products in the user's cart
+        $cartCategoryIds = $cart->pluck('product.cat_id')->unique()->toArray();
 
+        $relatedProducts = [];        
+        foreach ($cartCategoryIds as $categoryId) {
+            $relatedProductsForCategory = Products::where('cat_id', $categoryId)
+                ->where('id', '!=', $cart->pluck('product.id')->toArray())
+                ->get();
+        
+            $relatedProducts = array_merge($relatedProducts, $relatedProductsForCategory->toArray());
+        }
+        
+        // echo '<pre>';
+        // print_r($relatedProducts);
+        // die();
+        
+        return view('Front.Cart.index', compact('cart', 'subtotalSum', 'relatedProducts'));
+    }
+    
     public function addToCart(Request $request){
         $product = Products::find($request->product_id);
     

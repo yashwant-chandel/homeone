@@ -148,15 +148,29 @@
             </div>
         </div>
     </footer>
-    <!-- toaster script -->
-    <!-- <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
-    <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
-    <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
-    <script src="{{ asset('admin-theme/assets/js/example-toastr.js?ver=3.1.2') }}"></script>
-    <script src="{{ asset('admin-theme/assets/js/libs/datatable-btns.js?ver=3.1.2') }}"></script> -->
-    <!-- end toster scripts -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mhayes-twentytwenty/1.0.0/js/jquery.twentytwenty.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="{{ asset('front/js/script.js') }}"></script>
+
+    @if(Session::get('error'))
+    <script>
+        iziToast.error({
+            message: '{{ Session::get("error") }}',
+            position: 'topRight' 
+        });
+    </script>
+    @endif
+    @if(Session::get('success'))
+    <script>
+        iziToast.success({
+            message: '{{ Session::get("success") }}',
+            position: 'topRight' 
+        });
+    </script>
+    @endif
+    
+
+
 </body>
