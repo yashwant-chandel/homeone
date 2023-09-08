@@ -311,7 +311,7 @@
             $('#token').val(setupIntent.payment_method);
             form.submit();
         }
-  });
+  }); 
 </script>
 @endsection
    
