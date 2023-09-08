@@ -146,11 +146,11 @@
                             </div>
                             <div class="col-lg-6 d-flex">
                                 <span class="caption-text text-primary"><em class="icon ni ni-call-fill"></em></span>
-                                <span class="caption-text text-break">{{ $p->mobile ?? '' }}</span>
+                                <span class="caption-text text-break">{{ $p->phone ?? '' }}</span>
                             </div>
                             <div class="col-lg-6 d-flex">
                                 <span class="sub-text text-primary"><em class="icon ni ni-mail-fill"></em></span>
-                                <span class="caption-text">{{ $p->mobile ?? '' }}</span>
+                                <span class="caption-text">{{ $p->email ?? '' }}</span>
                             </div>
                         <div class="nk-modal-head mt-sm-5 mt-4 mb-4">
                             <h5 class="title">Payment Detail</h5>

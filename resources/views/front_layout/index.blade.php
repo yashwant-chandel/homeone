@@ -48,6 +48,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('lawn') }}">Lawn</a>
                             </li>
+                            @if(Auth::user())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('store') }}">Store</a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                     <div class="col-md-2  d-none d-lg-block d-md-none">

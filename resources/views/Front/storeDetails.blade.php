@@ -77,7 +77,7 @@
                         </div>
                         <div class="value_data">
                              <div class="value-button decrease" value="Decrease Value">-</div>
-                                <input class="number" type="number" id="number" value="1" maxlength="{{ $product->Quantity ?? '' }}" minlength="1" disabled/>
+                                <input class="number" type="number" id="number" value="1" data-max="{{ $product->Quantity ?? '' }}"  maxlength="{{ $product->Quantity ?? '' }}" minlength="1" disabled/>
                                 <div class="value-button increase" value="Increase Value">+</div>
                             <!-- <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-
                             </div>
