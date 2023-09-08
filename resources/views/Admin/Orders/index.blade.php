@@ -36,7 +36,7 @@
                                             </div><!-- .card-inner -->
                                             <div class="card-inner p-0" id="table">
                                                 <div class="nk-tb-list nk-tb-tnx">
-                                                    <div class="nk-tb-item nk-tb-head">
+                                                    <div class="nk-tb-item nk-tb-head text-center">
                                                         <div class="nk-tb-col"><span>Orderid</span></div>
                                                         <!-- <div class="nk-tb-col tb-col-xxl"><span></span></div> -->
                                                         <div class="nk-tb-col tb-col-lg"><span>Payment Intent</span></div>
@@ -46,7 +46,7 @@
                                                         <div class="nk-tb-col nk-tb-col-tools"></div>
                                                     </div><!-- .nk-tb-item -->
                                                     @foreach($payments as $payment)
-                                                    <div class="nk-tb-item">
+                                                    <div class="nk-tb-item text-center">
                                                         <div class="nk-tb-col">
                                                             <div class="nk-tnx-type">
                                                                 <div class="nk-tnx-type-icon bg-success-dim text-success">
@@ -64,9 +64,9 @@
                                                         </div> -->
                                                         <div class="nk-tb-col tb-col-lg">
                                                             <span class="tb-lead-sub">#{{ $payment->payment_intent ?? '' }}</span>
-                                                            <span class="badge badge-dot bg-success">Deposit</span>
+                                                            <!-- <span class="badge badge-dot bg-success">Deposit</span> -->
                                                         </div>
-                                                        <div class="nk-tb-col text-end">
+                                                        <div class="nk-tb-col ">
                                                             <span class="tb-amount">{{ $payment->orders[0]->user['name'] ?? '' }}</span>
                                                             <span class="tb-amount-sm"><a href="{{ url('admin-dashboard/employeregister/?id=') }}{{ $payment->orders[0]->user['id'] ?? '' }}">{{ $payment->orders[0]->user['email'] ?? '' }}</a></span>
                                                         </div>

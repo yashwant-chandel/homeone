@@ -41,7 +41,7 @@
 <div class="nk-block nk-block-lg my-4">
     <div class="nk-block-head">
         <div class="nk-block-head-content d-flex justify-content-between">
-            <h4 class="nk-block-title">Categories</h4>
+            <h4 class="nk-block-title">Countries</h4>
             <button class="btn btn-primary" id="addnew">Add New</button>
         </div>
     </div>

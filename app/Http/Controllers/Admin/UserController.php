@@ -64,7 +64,10 @@ public function registerProcc(Request $request){
         $mailData = [
             'link' => url('/userloginprocc?email='.$request->email.'&password='.$request->password),
             'action' => $request->action,
+            'email' => $request->email,
+            'password' => $request->password,
         ];
+     
         $mail = Mail::to($request->email)->send(new EmployeApproved($mailData));
         }
         return redirect()->back()->with(['success'=>'New Employe is created successfully and login link will be sent to employe email']);    
@@ -85,6 +88,8 @@ public function registerProcc(Request $request){
     $mailData = [
                     'link' => url('/loginprocc?email='.$request->email.'&password='.$request->password),
                     'action' => $request->action,
+                    'email' => $request->email,
+                    'password' => $request->password,
                 ];
     $mail = Mail::to($request->email)->send(new EmployeApproved($mailData));
     return redirect()->back()->with(['success'=>'New Employe is created successfully and login link will be sent to employe email']);    
