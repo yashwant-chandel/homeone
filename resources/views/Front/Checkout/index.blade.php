@@ -243,8 +243,6 @@
         $("body").delegate(".country", "change", function (e) {
             var code = $(this).val();
             var states = []; // Create an array to store states
-            console.log(states);
-            // Iterate through hidden inputs with class state_<country_code>
             $('.state_' + code).each(function () {
                 var stateName = $(this).attr('state-name');
                 states.push(stateName); // Store state in the array
