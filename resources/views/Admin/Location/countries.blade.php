@@ -28,8 +28,7 @@
 
                         <div class="form-group">
                             <button type="button" class="btn btn-primary add" id="add"><span id="button_value">Add</span></button>
-                            <button type="button" class="btn btn-primary  add-new d-none" id="add_new"><span >Add New</span></button>
-                                         
+                            <button type="button" class="btn btn-primary  add-new d-none" id="add_new"><span >Add New</span></button>                                        
                         </div>
                 </div>
                 </form>

@@ -25,7 +25,6 @@ Breadcrumbs::for('product-list', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('Products', route('products'));
 });
-
 Breadcrumbs::for('product-add', function (BreadcrumbTrail $trail) {
     $trail->parent('product-list');
     $trail->push('Add', route('products-add'));
