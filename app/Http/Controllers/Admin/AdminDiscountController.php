@@ -8,12 +8,16 @@ use App\Models\Discount;
 class AdminDiscountController extends Controller
 {
     public function index(){
-
-        return view('Admin.Discount.index');
+        $discount =  Discount::all();
+        return view('Admin.Discount.index',compact('discount'));
     }
-    public function add(){
-
-        return view('Admin.Discount.adddiscount');
+    public function add($id = null){
+        if($id){
+            $discount = Discount::find($id);
+        }else{
+            $discount = [];
+        }
+        return view('Admin.Discount.adddiscount',compact('discount'));
     }
     public function addProcc(Request $request){
         // echo '<pre>';

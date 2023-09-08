@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("discount_use");
             $table->string("discount_used");
             $table->string("expire-on");
+            $table->integer("status")->default(1);
             $table->timestamps();
         });
     }

@@ -89,8 +89,8 @@ Route::post('state-delete',[LocationController::class,'removeState']);
 
 //discounts
 Route::get('admin-dashboard/discounts',[AdminDiscountController::class,'index']);
-Route::get('admin-dashboard/discounts/add',[AdminDiscountController::class,'add']);
-Route::post('admin-dashboard/discounts/addprocc',[AdminDiscountController::class,'addProcc']);
+Route::get('admin-dashboard/discounts/add/{id?}',[AdminDiscountController::class,'add']);
+Route::post('admin-dashboard/discounts/addprocc/',[AdminDiscountController::class,'addProcc']);
 
 });
 
