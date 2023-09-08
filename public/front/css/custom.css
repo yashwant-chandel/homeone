@@ -1,5 +1,7 @@
 /* ======== contact page css start ====== */
-
+a{
+    cursor: pointer;
+}
 .contact-us-sec .contact-icon {
     height: 111px;
     width: 100%;
@@ -103,8 +105,8 @@ form.contact_detail-form {
     font-weight: 400;
     line-height: normal;
 }
-
 .submit_cta a {
+    cursor: pointer;
     border-radius: 150px;
     background: #000ABC;
     padding: 20px 66px;
@@ -116,6 +118,25 @@ form.contact_detail-form {
 }
 
 .submit_cta a:hover {
+    border: 1px solid #000ABC;
+    background: #fff;
+    color: #000ABC;
+}
+
+
+.submit_cta button {
+    cursor: pointer;
+    border-radius: 150px;
+    background: #000ABC;
+    padding: 20px 66px;
+    font-size: 18px;
+    color: #fff;
+    display: inline-block;
+    font-weight: 600;
+    border: 1px solid #000ABC;
+}
+
+.submit_cta button:hover {
     border: 1px solid #000ABC;
     background: #fff;
     color: #000ABC;
@@ -1461,7 +1482,17 @@ input.code-btn {
 }
 
 @media only screen and (max-width:991px) {
-
+    header.site-header.custom_header .navbar-collapse {
+        background: #000;
+        top: 60px;
+        z-index: 9999;
+        padding: 10px;
+        position: absolute;
+    }
+    
+    header.site-header.custom_header .navbar-light .navbar-nav .nav-link {
+        color: #fff;
+    }
     .contact-us-sec .contact-box {
         flex-direction: column;
         text-align: center;
@@ -1868,5 +1899,7 @@ input.code-btn {
         margin-top: 16px;
     }
 }
-
+.value-button{
+    cursor: pointer;
+}
 /* ======== responsive  css end ======== */

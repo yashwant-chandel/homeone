@@ -59,7 +59,7 @@
 
 
                             <div class="submit_cta">
-                                <button class="submit-btn">Login</button>
+                                <button class="submit-btn submit-btn">Login</button>
                                 <!-- <a href="" class="create-btn">Create an Account</a> -->
                             </div>
                         </form>

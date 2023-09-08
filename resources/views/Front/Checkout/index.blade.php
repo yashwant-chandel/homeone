@@ -200,8 +200,8 @@
                                             <tr>
                                                 <td colspan="2" class="count-data">
                                                     <div class="cart-btn code-btn">
-                                                        <input type="text" class="code-btn" placeholder="Gift Car Or Discount Code" > 
-                                                        <a href="#" class="blur-btn">Apply</a></div>
+                                                        <input type="text" class="code-btn discountCode" placeholder="Gift Car Or Discount Code" > 
+                                                        <a  class="blur-btn applyDiscount" data-amount="{{ $total_amount ?? '' }}">Apply</a></div>
                                                 </td>
                                             </tr>
                                            
@@ -238,6 +238,7 @@
         </div>
     </section>
     <script>
+      
     $(document).ready(function () {
         $("body").delegate(".country", "change", function (e) {
             var code = $(this).val();
@@ -312,6 +313,33 @@
             form.submit();
         }
   }); 
+</script>
+
+
+<script>
+    
+    $(document).ready(function(){
+        $("body").delegate('.applyDiscount','click',function(e){
+            e.preventDefault();
+            var amount = $(this).attr('data-amount');
+            var code = $('.discountCode').val();
+            console.warn(code);
+            console.log(amount);
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ url('checkDiscount ') }}',
+                    dataType: 'json',
+                    data: {
+                        code: code,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+
+                });
+        });
+    });
 </script>
 @endsection
    
