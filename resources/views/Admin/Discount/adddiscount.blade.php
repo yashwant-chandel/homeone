@@ -72,7 +72,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label" for="expire-on">Expire On</label>
                                                                 <div class="form-control-wrap">
-                                                                    <input type="datetime-local" class="form-control" name="expire_on" id="expire-on" placeholder="Input placeholder">
+                                                                    <input type="datetime-local" class="form-control" name="expire_git puon" id="expire-on" placeholder="Input placeholder">
                                                                 </div>
                                                             </div>
                                                         </div>
