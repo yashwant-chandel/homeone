@@ -12,6 +12,7 @@ use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\AdminDiscountController;
 use App\Http\Controllers\Front\CheckoutController;
 
 
@@ -73,7 +74,8 @@ Route::post('admin-dashboard/settingupdate',[AdminSettingController::class,'upda
 
 //orderes
 Route::get('admin-dashboard/orders',[OrdersController::class,'index'])->name('order-list');
-Route::get('admin-dashboard/orderview/{orderid}',[OrdersController::class,'orderview'])->name('order-view');
+// Route::get('admin-dashboard/orderview/{orderid}',[OrdersController::class,'orderview'])->name('order-view');
+Route::post('admin-dashboard/orderupdate',[OrdersController::class,'orderupdate'])->name('order-update');
 
 
 // Location controller 
@@ -84,6 +86,11 @@ Route::post('country-delete',[LocationController::class,'removeCountry']);
 Route::get('admin-dashboard/states',[LocationController::class,'states']);
 Route::post('addState',[LocationController::class,'addState']);
 Route::post('state-delete',[LocationController::class,'removeState']);
+
+//discounts
+Route::get('admin-dashboard/discounts',[AdminDiscountController::class,'index']);
+Route::get('admin-dashboard/discounts/add',[AdminDiscountController::class,'add']);
+Route::post('admin-dashboard/discounts/addprocc',[AdminDiscountController::class,'addProcc']);
 
 });
 

@@ -113,6 +113,20 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><i class="icon fas fa-globe"></i></em></span>
+                                        <span class="nk-menu-text">Discounts</span>
+                                    </a>
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/discounts') }}" class="nk-menu-link"><span class="nk-menu-text">Coupon list</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ url('admin-dashboard/discounts/add') }}" class="nk-menu-link"><span class="nk-menu-text">Add Coupon</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>

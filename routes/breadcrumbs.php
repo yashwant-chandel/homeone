@@ -25,7 +25,6 @@ Breadcrumbs::for('product-list', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('Products', route('products'));
 });
-
 Breadcrumbs::for('product-add', function (BreadcrumbTrail $trail) {
     $trail->parent('product-list');
     $trail->push('Add', route('products-add'));
@@ -57,6 +56,11 @@ Breadcrumbs::for('gallery-edit', function (BreadcrumbTrail $trail, $slug) {
 Breadcrumbs::for('account-setting', function (BreadcrumbTrail $trail) {
     $trail->parent('admin-dashboard');
     $trail->push('Account Setting', route('account-setting'));
-})
+});
 
+//ordersbreadcrumbs
+Breadcrumbs::for('orders',function (BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('Orders',route('order-list'));
+});
 ?>
