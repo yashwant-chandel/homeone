@@ -319,6 +319,7 @@
 
 
 <script>
+    
     $(document).ready(function(){
         $("body").delegate('.applyDiscount','click',function(e){
             e.preventDefault();
