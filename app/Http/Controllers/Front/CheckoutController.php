@@ -40,7 +40,9 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-        
+        echo '<pre>';
+        print_r($request->all());
+        die();
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -104,7 +106,7 @@ class CheckoutController extends Controller
                         $product = Products::where('id', $p_id)->first();
                         $product->Quantity = $product->Quantity - $qty;
                         $product->save();
-                        /*Update cart item   status*/
+                    /*Update cart item   status*/
                         $cartstatus = Cart::where('status', 0)
                             ->where('user_id', Auth::user()->id)
                             ->where('product_id', $p_id)

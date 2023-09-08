@@ -38,7 +38,7 @@
                       <td data-th="Total" class="product-data-wrap total-text">
                             <div class="value_data">
                                 <div class="value-button decrease" value="Decrease Value">-</div>
-                                <input class="number" id="number" type="number" data-product-id="{{ $c->product->id }}" value="{{ $c->product_quantity ?? '' }}" disabled />
+                                <input class="number" id="number" type="number" data-max="{{ $c->product->Quantity ?? '' }}" data-product-id="{{ $c->product->id }}" value="{{ $c->product_quantity ?? '' }}" disabled />
                                 <div class="value-button increase" value="Increase Value">+</div>
                             </div>
                         </td>
@@ -280,6 +280,7 @@ $(document).ready( function(){
                             message: response.error,
                             position: 'topRight' // Set the position to top right
                         });
+                        $(".tableTotal").load(location.href + " .tableTotal");
                         // console.log(response.error);
                     }
                    

@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('state_name');
-            $table->integer('country_id');
+            $table->unsignedBigInteger('country_id');
+            $table->foreign('country_id')
+                ->references('id')->on('countries')
+                ->onDelete('cascade');
             $table->timestamps();
         });
+        
     }
 
     /**

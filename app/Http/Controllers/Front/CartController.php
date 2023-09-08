@@ -13,13 +13,10 @@ class CartController extends Controller
     public function index(Request $request){
         $userId = Auth::user()->id;
     
-        // Fetch the user's cart items
         $cart = Cart::with('product')->where('status', 0)->where('user_id', $userId)->get();
     
-        // Calculate the subtotal
         $subtotalSum = Cart::where('status', 0)->where('user_id', $userId)->sum('subtotal');
     
-        // Get the category IDs of products in the user's cart
         $cartCategoryIds = $cart->pluck('product.cat_id')->unique()->toArray();
 
         $relatedProducts = [];        
@@ -40,14 +37,19 @@ class CartController extends Controller
     
     public function addToCart(Request $request){
         $product = Products::find($request->product_id);
-    
+        if($product->Quantity < $request->quantity){
+            return response()->json(['error' => 'Sorry, the quantity of the product that you have selected is not in stock yet.']);
+        }
         if (!$product) {
             return response()->json(['error' => 'Failed to find product']);
         }
         if (Cart::where('status', '=', 0)->where('product_id',$request->product_id)->where('user_id',Auth::user()->id)->exists()) {
-            $cart = Cart::where('product_id', $request->product_id)->where('status', 0)->first();
+            $cart = Cart::where('product_id', $request->product_id)->where('status', 0)->where('user_id',Auth::user()->id)->first();
             if ($cart) {
                 $cart->product_quantity += $request->quantity;
+                    if($cart->product_quantity > $product->Quantity){
+                        return response()->json(['error' => 'Sorry, You have already added product stock limit to your cart..']);
+                    }
                 $cart->subtotal = $cart->product_quantity * $cart->product_price;
                 $cart->save();   
                 return response()->json(['success' => 'Product quantity has been updated']);
@@ -66,11 +68,16 @@ class CartController extends Controller
         $cart->save();
     
         return response()->json(['success' => 'Product has been added to the cart']);
+        
     }
 
     public function update(Request $request){
         if($request->cartItems){
             foreach($request->cartItems as $cartData){
+                $product = Products::find($cartData['productId']);
+                if($product->Quantity < $cartData['quantity']){
+                    return response()->json(['error' => 'Sorry, the quantity of the product that you have selected is not in stock yet.']);
+                }
                 $cart = Cart::where('user_id', Auth::user()->id)
                     ->where('product_id', $cartData['productId'])
                     ->where('status', 0)

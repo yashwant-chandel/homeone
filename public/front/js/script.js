@@ -109,11 +109,17 @@ $(document).ready(function () {
 // Use delegated event handling for increase buttons
 $("body").on("click", ".value-button.increase", function () {
   var input = $(this).closest('.value_data').find('.number');
+  var maxValue = parseInt(input.attr('data-max'), 10);
   var value = parseInt(input.val(), 10);
+  
   value = isNaN(value) ? 0 : value;
-  value++;
-  input.val(value);
+  
+  if (value < maxValue) {
+    value++;
+    input.val(value);
+  }
 });
+
 
 // Use delegated event handling for decrease buttons
 $("body").on("click", ".value-button.decrease", function () {

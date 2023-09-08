@@ -102,7 +102,7 @@
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><i class="icon fas fa-globe"></i></em></span>
-                                        <span class="nk-menu-text">Country-State</span>
+                                        <span class="nk-menu-text">Delivery Locations</span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
