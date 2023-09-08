@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string("discount_code");
             $table->string("discount_type");
             $table->integer("amount");
-            $table->string("discount_use");
-            $table->string("discount_used");
-            $table->string("expire-on");
+            $table->string("discount_use")->nullable();
+            $table->string("discount_used")->nullable();
+            $table->string("expire_on");
+            $table->integer("status")->default(1);
             $table->timestamps();
         });
     }
