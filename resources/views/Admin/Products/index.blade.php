@@ -75,7 +75,7 @@
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <ul class="link-list-opt no-bdr">
                                                 <li><a href="{{ url('admin-dashboard/product-edit') ?? '' }}/{{ $product->slug ?? ''}}"><em class="icon ni ni-eye"></em><span>Edit</span></a></li>
-                                                <li><a href="{{ url('product-remove') ?? '' }}/{{ $product->slug ?? ''}}"><em class="icon ni ni-focus"></em><span>Remove</span></a></li>
+                                                <li><a class="delete" link="{{ url('product-remove') ?? '' }}/{{ $product->slug ?? ''}}"><em class="icon ni ni-focus"></em><span>Remove</span></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -89,4 +89,23 @@
         </div>
     </div>
 </div>
+<script>
+                                        $(document).ready(function(){
+                                            $('.delete').click(function(){
+                                                    link = $(this).attr('link');
+                                                    Swal.fire({
+                                                            title: 'Do you want to delete this product?',
+                                                            showCancelButton: true,
+                                                            confirmButtonText: 'yes',
+                                                            confirmButtonColor: '#008000',
+                                                            cancelButtonText: 'no',
+                                                            cancelButtonColor: '#d33',
+                                                            }).then((result) => {
+                                                            if (result.isConfirmed) {
+                                                                window.location.href = link;
+                                                            } 
+                                                            }); 
+                                            });
+                                        });
+</script>
 @endsection

@@ -13,7 +13,8 @@ class OrdersController extends Controller
     public function index(){
         // $orders = Order::all()->unique('order_num')->toArray();
         $payments = Payment::where('status',1)->with(['orders','address','orders.user'])->orderBy('created_at','desc')->get();
-//        dd($payments);
+       dd($payments);
+
         return view('Admin.Orders.index',compact('payments'));
     }
 //     public function orderview($orderid){

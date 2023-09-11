@@ -18,6 +18,9 @@
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" name="discount_name" class="form-control" id="discount_name" value="" placeholder="Enter Discount Name">
                                                                 </div>
+                                                                @if ($errors->has('discount_name'))
+                                                                    <span class="text-danger">{{ $errors->first('discount_name') }}</span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -26,6 +29,9 @@
                                                                 <div class="form-control-wrap">
                                                                     <input type="text" name="discount_code" class="form-control" id="discount_code" value="" placeholder="Enter Coupon code">
                                                                 </div>
+                                                                @if ($errors->has('discount_code'))
+                                                                    <span class="text-danger">{{ $errors->first('discount_code') }}</span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -39,6 +45,9 @@
                                                                             <option value="percentage">Percentage</option>
                                                                         </select>
                                                                     </div>
+                                                                    @if ($errors->has('discount_type'))
+                                                                    <span class="text-danger">{{ $errors->first('discount_type') }}</span>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -51,6 +60,9 @@
                                                                     </div>
                                                                     <input type="text" class="form-control" name="amount" id="amount" value="{{ $discount->amount ?? '' }}" placeholder="Input placeholder">
                                                                 </div>
+                                                                @if ($errors->has('amount'))
+                                                                    <span class="text-danger">{{ $errors->first('amount') }}</span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -64,6 +76,9 @@
                                                                             <option value="multiple">Multiple</option>
                                                                         </select>
                                                                     </div>
+                                                                    @if ($errors->has('discount_use'))
+                                                                    <span class="text-danger">{{ $errors->first('discount_use') }}</span>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -73,6 +88,9 @@
                                                                 <div class="form-control-wrap">
                                                                     <input type="datetime-local" class="form-control" name="expire_on" id="expire-on" value="" placeholder="Input placeholder">
                                                                 </div>
+                                                                @if ($errors->has('expire_on'))
+                                                                    <span class="text-danger">{{ $errors->first('expire_on') }}</span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mt-3">
