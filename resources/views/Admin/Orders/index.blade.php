@@ -163,6 +163,12 @@
                                 <span class="caption-text text-primary">Payment status : </span>
                                @if($p->status == 1)  <span class="caption-text badge bg-success ms-2 text-white"> success </span>@else <span class="caption-text badge bg-danger ms-2 text-white"> failed </span> @endif
                         </div>
+                      @if($p->orders[0]->discount_code)
+                        <div class="col-lg-12 d-flex">
+                                <span class="caption-text text-primary">Discount Code : </span>
+                                <span class="caption-text"> {{ $p->orders[0]->discount_code ?? '' }}</span>
+                        </div>
+                        @endif
                         <div class="nk-modal-head mt-sm-5 mt-4 mb-4">
                             </a><h5 class="title">Products</h5>
                         </div>
@@ -200,16 +206,16 @@
                                                                 <td colspan="2"></td>
                                                                 <td colspan="2">Processing fee</td>
                                                                 <td>$10.00</td>
-                                                            </tr>
+                                                            </tr>-->
                                                             <tr>
                                                                 <td colspan="2"></td>
-                                                                <td colspan="2">TAX</td>
-                                                                <td>$43.50</td>
-                                                            </tr> -->
+                                                                <td colspan="2">Discount</td>
+                                                                <td>${{ $order->total_price - $order->discount_amount }}</td>
+                                                            </tr> 
                                                             <tr>
                                                                 <td colspan="2"></td>
                                                                 <td colspan="2">Grand Total</td>
-                                                                <td>${{ $order->total_price ?? '' }}</td>
+                                                                <td>${{ $order->discount_amount ?? '' }}</td>
                                                             </tr>
                                                         </tfoot>
                                                     </table>

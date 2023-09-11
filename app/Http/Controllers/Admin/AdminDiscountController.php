@@ -81,6 +81,7 @@ class AdminDiscountController extends Controller
         $discount->status = $request->status;
         $discount->update();
         return response()->json(['success'=>'Successfully updated status']);
+
     }
 
     public function checkDiscount(Request $request){
@@ -92,8 +93,9 @@ class AdminDiscountController extends Controller
         
             if ($discount) {
                 $amount = $request->amount;
-        
-                if ($discount->discount_type === 'fixed') {
+                $total_amount = $amount;
+                if ($discount->discount_type === 'fixed')
+                 {
                     $amount -= $discount->amount;
                 } elseif ($discount->discount_type === 'percentage') {
                     $percentage = $discount->amount;
@@ -103,13 +105,13 @@ class AdminDiscountController extends Controller
                     $amount = 0;
                 }
                 $amount = number_format((float)$amount, 2, '.', '');
-                return response()->json(['success' => $amount]);
+                return response()->json(['success' => $amount,'total' => $total_amount ]);
             }
         
             return response()->json(['error' => 'Invalid discount code or expired']);
         }
         
         return response()->json(['error' => 'Invalid request']);
-         
+        
     }
 }

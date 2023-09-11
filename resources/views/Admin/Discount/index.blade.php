@@ -36,6 +36,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach($discount as $d)
+                                                 
                                                     <tr class="tb-tnx-item">
                                                         <td class="tb-tnx-id">
                                                             <a ><span>{{ $d->discount_code ?? '' }}</span></a>
@@ -46,20 +47,20 @@
                                                             </div>
                                                             <div class="tb-tnx-date">
                                                                 <span class="date">{{ $d->amount ?? '' }}</span>
-                                                                <span class="date">{{ $d->expire_on ?? '' }}</span>
+                                                                <span class="date">{{ $d->discount_type }}</span>
                                                             </div>
                                                         </td>
                                                         <td class="tb-tnx-amount">
                                                             <div class="tb-tnx-total">
-                                                                <span class="amount">{{ $d->discount_type ?? '' }}</span>
+                                                                <span class="amount">{{ $d->discount_use ?? '' }}</span>
                                                             </div>
                                                             <div class="tb-tnx-status">
-                                                                <span class="badge badge-dot bg-warning">{{ $d->discount_use ?? '' }}</span>
+                                                                <span class="amount">{{ $d->discount_used ?? '-' }}</span>
                                                             </div>
                                                         </td>
                                                         <td class="tb-tnx-amount">
                                                              <div class="tb-tnx-total">
-                                                                <span class="amount">{{ $d->discount_used ?? '' }}</span>
+                                                                <span class="amount">{{ $d->expire_on ?? '' }}</span>
                                                             </div>
                                                             <div class="tb-tnx-status">
                                                                 <span class="">

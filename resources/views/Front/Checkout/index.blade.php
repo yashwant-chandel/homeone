@@ -352,7 +352,9 @@
                                 message: 'Discount Coupon has been applied',
                                 position: 'topRight'
                             });
-                            $('.discountText').html('$'+response.success);
+                            discount_amount = parseInt(response.total)-parseInt(response.success);
+                            
+                            $('.discountText').html('$'+discount_amount);
                             $('.totalAmount').html('$'+response.success);
                             $('.dicount_code').val(discount_code);
                             $('.discount_amount').val(response.success);
