@@ -20,9 +20,8 @@
                 <h3>All Products</h3>
             </div>
             <div class="select-data">
-                <select class="shortBy" onchange="selectCng(this);">
+                <select class="shortBy" >
                     <option value="ASC-product_name" class="">Sort By: Alphabetically: A-Z</option>
-                    <option value="ASC-price" class="">Sort By: Price: 0-9</option>
                 </select>
             </div>
         </div>
@@ -70,13 +69,7 @@
 
     </div>
 </section>
-<script>
-    // $(document).ready(function (){
-    //     $('.shortBy').on('chnage', function(){
-    //         console.log($(this).val());
-    //     });
-    // })
-</script>
+
 <!-- Add to cart script -->
 <script>
 $(document).ready(function() {
