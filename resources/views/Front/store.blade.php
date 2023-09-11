@@ -20,8 +20,8 @@
                 <h3>All Products</h3>
             </div>
             <div class="select-data">
-                <select>
-                    <option>Sort By: Alphabetically: A-Z</option>
+                <select class="shortBy" >
+                    <option value="ASC-product_name" class="">Sort By: Alphabetically: A-Z</option>
                 </select>
             </div>
         </div>
@@ -69,6 +69,7 @@
 
     </div>
 </section>
+
 <!-- Add to cart script -->
 <script>
 $(document).ready(function() {

@@ -221,6 +221,10 @@
                                             <td data-th="Taxes" class="cart-detail cart-custom">$0</td>
                                           </tr>
                                           <tr>
+                                            <td data-th="Taxes" class="cart-custom">Discount amount</td>
+                                            <td data-th="Taxes" class="cart-detail cart-custom discountText">$0</td>
+                                          </tr>
+                                          <tr>
                                             <td data-th="data" class="total-data">Order Total Incl. Tax</td>
                                             <td data-th="Total" class="total-data cart-detail totalAmount">${{ $total_amount ?? '' }}</td>
                                           </tr>
@@ -348,6 +352,7 @@
                                 message: 'Discount Coupon has been applied',
                                 position: 'topRight'
                             });
+                            $('.discountText').html('$'+response.success);
                             $('.totalAmount').html('$'+response.success);
                             $('.dicount_code').val(discount_code);
                             $('.discount_amount').val(response.success);
@@ -356,6 +361,7 @@
                                 message: response.error,
                                 position: 'topRight' 
                             });
+                            $('.discountText').html('$0');
                             $('.dicount_code').val('');
                             $('.discount_amount').val('');
                             $('.totalAmount').html('$'+amount);
