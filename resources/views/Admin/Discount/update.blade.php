@@ -9,6 +9,7 @@
                                         </div>
                                         <form action="{{ url('admin-dashboard/discounts/addprocc') }}" method="post">
                                             @csrf
+                                        <input type="hidden" name="id" value="{{ $discount->id ?? '' }}">
                                         <div class="card card-bordered card-preview">
                                             <div class="card-inner">
                                                 <div class="preview-block">                                                
@@ -16,7 +17,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label" for="discount_name">Discount Name</label>
                                                                 <div class="form-control-wrap">
-                                                                    <input type="text" name="discount_name" class="form-control" id="discount_name" value="" placeholder="Enter Discount Name">
+                                                                    <input type="text" name="discount_name" class="form-control" id="discount_name" value="{{ $discount->discount_name ?? '' }}" placeholder="Enter Discount Name">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -24,7 +25,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label" for="discount_code">Coupon Code</label>
                                                                 <div class="form-control-wrap">
-                                                                    <input type="text" name="discount_code" class="form-control" id="discount_code" value="" placeholder="Enter Coupon code">
+                                                                    <input type="text" name="discount_code" class="form-control" id="discount_code" value="{{ $discount->discount_code ?? '' }}" placeholder="Enter Coupon code">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -35,8 +36,8 @@
                                                                     <div class="form-control-select">
                                                                         <select class="form-control" name="discount_type" id="discount_type">
                                                                             <option value="default_option">Please Select</option>
-                                                                            <option value="fixed" >Fixed</option>
-                                                                            <option value="percentage">Percentage</option>
+                                                                            <option value="fixed" @if($discount->discount_type == "fixed") selected @endif>Fixed</option>
+                                                                            <option value="percentage"@if($discount->discount_type == "percentage") selected @endif>Percentage</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -60,8 +61,8 @@
                                                                     <div class="form-control-select">
                                                                         <select class="form-control" name="discount_use" id="discount_use">
                                                                             <option value="default_option">Please Select</option>
-                                                                            <option value="single" >Single</option>
-                                                                            <option value="multiple">Multiple</option>
+                                                                            <option value="single"   @if($discount->discount_use == "single") selected @endif>Single</option>
+                                                                            <option value="multiple" @if($discount->discount_use == "multiple") selected @endif>Multiple</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -71,7 +72,7 @@
                                                             <div class="form-group">
                                                                 <label class="form-label" for="expire-on">Expire On</label>
                                                                 <div class="form-control-wrap">
-                                                                    <input type="datetime-local" class="form-control" name="expire_on" id="expire-on" value="" placeholder="Input placeholder">
+                                                                    <input type="datetime-local" class="form-control" name="expire_on" id="expire-on" value="{{ $discount->expire_on ?? '' }}" placeholder="Input placeholder">
                                                                 </div>
                                                             </div>
                                                         </div>
