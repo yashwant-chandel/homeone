@@ -123,8 +123,8 @@
                                                         _token: '{{csrf_token()}}'
                                                     },
                                                     success: function(response) {
-                                                    console.log(response);
-                                                    
+                                                            
+                                                        NioApp.Toast(response.success, 'info', {position: 'top-right'});
                                                     }
 
 

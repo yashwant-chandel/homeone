@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('product_price');
             $table->integer('total_price');
+            $table->string("discount_amount")->nullable();
+            $table->string("discount_code")->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });

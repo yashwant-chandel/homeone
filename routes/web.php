@@ -125,6 +125,11 @@ Route::post('remove-cart',[CartController::class,'removeCart']);
 Route::get('checkout',[CheckoutController::class,'index']);
 
 Route::post('checkoutpayment',[CheckoutController::class,'checkout']);
+
+
+/* Discount */
+Route::post('checkDiscount',[AdminDiscountController::class,'checkDiscount']);
+
 });
 
 

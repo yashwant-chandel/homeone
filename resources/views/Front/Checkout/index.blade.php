@@ -159,6 +159,8 @@
                                             </div>
                                             <div>
                                                 <!-- <a href="" class="place">place order</a> -->
+                                                <input type="hidden" name="discount_amount" class="discount_amount" />
+                                                <input type="hidden" name="discount_code" class="dicount_code" />
                                                 <input type="hidden" name="token" id="token" />
                                                 <input type="hidden" name="amount" value="{{ $total_amount }}">
                                                 <button type="submit" class="place btn  pay-with-btn " id="card-button" data-secret="{{ $client_secret }}">Pay
@@ -208,7 +210,7 @@
                                         
                                           <tr>
                                             <td data-th="Subtotal" class="cart-custom">Subtotal</td>
-                                            <td data-th="Subtotal" class="cart-detail cart-custom">${{ $total_amount ?? '' }}</td>
+                                            <td data-th="Subtotal" class="cart-detail cart-custom ">${{ $total_amount ?? '' }}</td>
                                           </tr>
                                           <tr>
                                             <td data-th="Shipping" class="cart-custom">Shipping  </td>
@@ -220,7 +222,7 @@
                                           </tr>
                                           <tr>
                                             <td data-th="data" class="total-data">Order Total Incl. Tax</td>
-                                            <td data-th="Total" class="total-data cart-detail ">${{ $total_amount ?? '' }}</td>
+                                            <td data-th="Total" class="total-data cart-detail totalAmount">${{ $total_amount ?? '' }}</td>
                                           </tr>
                                         </tbody>
                                       </table>
@@ -312,7 +314,7 @@
             $('#token').val(setupIntent.payment_method);
             form.submit();
         }
-  });
+  }); 
 </script>
 
 
@@ -322,20 +324,44 @@
         $("body").delegate('.applyDiscount','click',function(e){
             e.preventDefault();
             var amount = $(this).attr('data-amount');
-            var code = $('.discountCode').val();
-            console.warn(code);
-            console.log(amount);
+            var discount_code = $('.discountCode').val();
+            if(discount_code == ''){
+                iziToast.error({
+                    message: 'Code Value Empty',
+                    position: 'topRight' // Set the position to top right
+                });
+                return false;
+            }
                 $.ajax({
                     method: 'POST',
                     url: '{{ url('checkDiscount ') }}',
                     dataType: 'json',
                     data: {
-                        code: code,
+                        discount_code: discount_code,
+                        amount: amount,
                         _token: '{{csrf_token()}}'
                     },
                     success: function(response) {
                         console.log(response);
-                    }
+                        if(response.success){
+                            iziToast.success({
+                                message: 'Discount Coupon has been applied',
+                                position: 'topRight'
+                            });
+                            $('.totalAmount').html('$'+response.success);
+                            $('.dicount_code').val(discount_code);
+                            $('.discount_amount').val(response.success);
+                        }else{
+                            iziToast.error({
+                                message: response.error,
+                                position: 'topRight' 
+                            });
+                            $('.dicount_code').val('');
+                            $('.discount_amount').val('');
+                            $('.totalAmount').html('$'+amount);
+
+                        }
+                        }
 
                 });
         });
