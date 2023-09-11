@@ -115,7 +115,7 @@
                                 </li>
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><i class="icon fas fa-globe"></i></em></span>
+                                        <span class="nk-menu-icon"><em class="icon ni ni-tranx"></em></span>
                                         <span class="nk-menu-text">Discounts</span>
                                     </a>
                                     <ul class="nk-menu-sub">

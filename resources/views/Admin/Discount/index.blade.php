@@ -3,8 +3,13 @@
 
 <div class="nk-block nk-block-lg">
                                         <div class="nk-block-head">
-                                            <div class="nk-block-head-content">
-                                                <h4 class="nk-block-title">Discount Coupons</h4>
+                                            <div class="nk-block-head-content d-flex justify-content-between">
+                                                <div>
+                                                    <h4 class="nk-block-title">Discount Coupons</h4>
+                                                </div>
+                                                <div>
+                                                    {{ Breadcrumbs::render('discount-list') }}
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">
@@ -36,7 +41,6 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach($discount as $d)
-                                                 
                                                     <tr class="tb-tnx-item">
                                                         <td class="tb-tnx-id">
                                                             <a ><span>{{ $d->discount_code ?? '' }}</span></a>

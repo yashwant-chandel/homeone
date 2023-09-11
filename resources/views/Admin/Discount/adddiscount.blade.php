@@ -2,9 +2,13 @@
 @section('content')
 <div class="nk-block nk-block-lg">
                                         <div class="nk-block-head">
-                                            <div class="nk-block-head-content">
-                                                <h4 class="title nk-block-title">Add Discount Coupon</h4>
-                                               
+                                            <div class="nk-block-head-content d-flex justify-content-between">
+                                                <div>
+                                                     <h4 class="title nk-block-title">Add Discount Coupon</h4>
+                                                </div>
+                                                <div>
+                                                {{ Breadcrumbs::render('discount-add') }}
+                                                </div>
                                             </div>
                                         </div>
                                         <form action="{{ url('admin-dashboard/discounts/addprocc') }}" method="post">

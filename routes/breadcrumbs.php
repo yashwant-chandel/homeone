@@ -63,4 +63,18 @@ Breadcrumbs::for('orders',function (BreadcrumbTrail $trail){
     $trail->parent('admin-dashboard');
     $trail->push('Orders',route('order-list'));
 });
+
+//discounts
+Breadcrumbs::for('discount-list',function (BreadcrumbTrail $trail){
+    $trail->parent('admin-dashboard');
+    $trail->push('Discount-list',route('discount-list'));
+});
+Breadcrumbs::for('discount-add',function (BreadcrumbTrail $trail){
+    $trail->parent('discount-list');
+    $trail->push('Add',route('discount-add'));
+});
+Breadcrumbs::for('dicount-edit',function (BreadcrumbTrail $trail,$code){
+    $trail->parent('discount-list');
+    $trail->push($code,route('discount-update',['id' => $code]));
+});
 ?>
