@@ -110,6 +110,6 @@ class AdminDiscountController extends Controller
         }
         
         return response()->json(['error' => 'Invalid request']);
-        
+         
     }
 }
