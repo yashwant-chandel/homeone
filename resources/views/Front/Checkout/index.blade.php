@@ -342,7 +342,7 @@
                         _token: '{{csrf_token()}}'
                     },
                     success: function(response) {
-                        // console.log(response);
+                        console.log(response);
                         if(response.success){
                             iziToast.success({
                                 message: 'Discount Coupon has been applied',

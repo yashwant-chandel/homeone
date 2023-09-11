@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{ Countries,States,Products,Cart,Order,Payment,Address};
+use App\Models\{ Discount,Countries,States,Products,Cart,Order,Payment,Address};
 use Illuminate\Support\Str;
 
 use App\Mail\OrderMail;
@@ -41,9 +41,11 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-        echo '<pre>';
-        print_r($request->all());
-        die();
+       
+        // echo '<pre>';
+        // print_r($request->all());
+        // print_r($coupon);
+        // die();
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -59,7 +61,7 @@ class CheckoutController extends Controller
 // print_r($request->all());
 // die();
 
-        $amount = $request->$amount;
+        $amount = $request->amount;
         if($request->discount_code != ''){
             $amount = $request->discount_amount;
         }
@@ -126,6 +128,8 @@ class CheckoutController extends Controller
                             $order->user_id = Auth::user()->id;
                             $order->product_price = $product->sale_price;
                             $order->total_price = $request->amount;
+                            $order->discount_amount = $request->discount_amount;
+                            $order->discount_code = $request->discount_code;
                             $order->save();
                     }
                     /* add Address */
@@ -146,8 +150,8 @@ class CheckoutController extends Controller
                     $payment->payment_intent = $stripePaymentIntent->id;
                     $payment->stripe_customer_id = $customer->id;
                     $payment->total_amount = $request->amount;
-                    $payment->payment_ammount = $request->amount;
-                    $payment->discount = $orderNum;
+                    $payment->payment_ammount = $amount;
+                    $payment->discount = $request->discount_amount;
                     $payment->save();
                     /* Order booked mail : */
                     $mailData = [
@@ -181,43 +185,24 @@ class CheckoutController extends Controller
 
     }
     protected function couponUpdate(Request $request){
-        // if($request->discount_code && $request->amount){
-        //     $discount = Discount::where('discount_code', $request->discount_code)
-        //     ->where('expire_on', '>', now())
-        //     ->where('status',1)
-        //     ->first();
+        if($request->discount_code){
+            $discount = Discount::where('discount_code', $request->discount_code)
+            ->where('expire_on', '>', now())
+            ->where('status',1)
+            ->first();
 
-        //     if($discount){
-        //         if($discount->discount_type == 'fixed'){
-        //             $amount = $request->amount - $discount->amount;
-        //             if($discount->discount_use == 'multiple' ){
-        //                 $discount->discount_used += 1;
-        //                 $discount->save();
-        //             }else{
-        //                 $discount->status = 0;
-        //                 $$discount->save();
-        //             }
-        //             return true;
-        //         }
-        //         if($discount->discount_type == 'percentage'){
-        //             $percentage = $discount->amount;
-        //             $amount = $request->amount;
-                    
-        //             $amount = ($percentage / 100) * $amount;
-                    
-        //             if($discount->discount_use == 'multiple' ){
-        //                 $discount->discount_used += 1;
-        //                 $discount->save();
-        //             }else{
-        //                 $discount->status = 0;
-        //                 $$discount->save();
-        //             }
-                    
-        //             return response()->json($amount);
-        //         }
-        //     }
-        //     return response()->json(['error','Invalid discount Code or Expire']);
-        // }
+            if($discount){
+                    if($discount->discount_use == 'multiple' ){
+                        $discount->discount_used += 1;
+                        $discount->save();
+                    }else{
+                        $discount->status = 0;
+                        $discount->save();
+                    }
+                    return true;
+            }
+            return false;
+        }
     
     }
 
