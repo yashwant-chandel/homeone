@@ -64,7 +64,7 @@
                                                             <div class="tb-tnx-status">
                                                                 <span class="">
                                                                     <div class="form-check form-switch">
-                                                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" @if($d->status == 1) checked @endif>
+                                                                        <input class="form-check-input statuscheckbox" type="checkbox" data-id="{{ $d->id ?? '' }}" role="switch" id="flexSwitchCheckDefault" @if($d->status == 1) checked @endif>
                                                                     </div>
                                                             </span>
                                                             </div>
@@ -74,8 +74,8 @@
                                                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                                     <ul class="link-list-plain">
-                                                                        <li><a href="#">Edit</a></li>
-                                                                        <li><a href="#">Remove</a></li>
+                                                                        <li><a href="{{ url('admin-dashboard/discounts/update/'.$d->id) }}">Edit</a></li>
+                                                                        <li><a class="delete" link="{{ url('admin-dashboard/discounts/delete/'.$d->id) }}">Remove</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -87,5 +87,50 @@
                                             </table>
                                         </div><!-- .card-preview -->
                                     </div>
+                                    <script>
+                                        $(document).ready(function(){
+                                            $('.delete').click(function(){
+                                                    link = $(this).attr('link');
+                                                    Swal.fire({
+                                                            title: 'Do you want to delete this event?',
+                                                            showCancelButton: true,
+                                                            confirmButtonText: 'yes',
+                                                            confirmButtonColor: '#008000',
+                                                            cancelButtonText: 'no',
+                                                            cancelButtonColor: '#d33',
+                                                            }).then((result) => {
+                                                            if (result.isConfirmed) {
+                                                                window.location.href = link;
+                                                            } 
+                                                            }); 
+                                            });
+                                        });
+                                        $(document).ready(function(){
+                                        $('.statuscheckbox').on('click',function(){
+                                            id = $(this).attr('data-id');
+                                            if($(this).is(":checked")){
+                                                status = 1;
+                                            }else{
+                                                status = 0;
+                                            }
+                                            $.ajax({
+                                                method: 'POST',
+                                                url: '{{ url('admin-dashboard/updatestatus') }}',
+                                                dataType: 'json',
+                                                data: {
+                                                        id : id,
+                                                        status: status,
+                                                        _token: '{{csrf_token()}}'
+                                                    },
+                                                    success: function(response) {
+                                                    console.log(response);
+                                                    
+                                                    }
+
+
+                                                });
+                                        });
+                                        });
+                                    </script>
 
 @endsection
