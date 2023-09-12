@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\AdminDiscountController;
 use App\Http\Controllers\Front\CheckoutController;
+use App\Http\Controllers\Front\ContactController;
 
 
 /*
@@ -102,7 +103,9 @@ Route::post('admin-dashboard/updatestatus',[AdminDiscountController::class,'upda
 
 // Front controller start from here :
 Route::get('/',[FrontController::class,'index']);
-Route::get('/contact',[FrontController::class,'contact']);
+//contact
+Route::get('/contact',[ContactController::class,'index']);
+Route::post('/contactSubmit',[ContactController::class,'submitprocc']);
 Route::get('/lawn',[FrontController::class,'lawn']);
 Route::get('/exteriors',[FrontController::class,'exteriors']);
 

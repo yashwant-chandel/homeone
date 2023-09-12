@@ -72,7 +72,8 @@
                     <h4>Leave Us Your Info And We Will Get Back To You</h4>
                 </div>
 
-                <form class="contact_detail-form" method="post" action="{{ url('') }}">
+                <form class="contact_detail-form" method="post" action="{{ url('contactSubmit') }}">
+                    @csrf
                     <div class="form-group">
                         <input type="text" class="form-control"  aria-describedby="emailHelp" name="name" placeholder="Name">
                       </div>
