@@ -23,10 +23,15 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="about-text">
-                        @if(isset($exterior->first_section_text))
-                        <?php echo $exterior->first_section_text; ?>
+                        @if(isset($exterior->first_section_title))
+                           <h2 class="main-heading"> <?php echo $exterior->first_section_title; ?></h2>
                         @else
                         <h2>Install And <span class="blue">Product Done Right</span></h2>
+                        @endif
+                        @if(isset($exterior->first_section_text))
+                        
+                            <?php echo $exterior->first_section_text; ?>
+                        @else
                         <p>Every Home One bulb is Canada and USA certified. Be weary of installers not using approved
                             products and pulling proper permits. <br> <br>
                             ​
@@ -84,11 +89,16 @@
                 </div>
                 <div class="col-md-6">
                     <div class="create-text">
+                        @if(isset($exterior->second_section_title))
+                                <h2 class="main-heading"> <?php echo $exterior->second_section_title; ?></h2>
+                            @else
+                                <h3>If You Can Think It, You Can <span class="blue">Create It</span></h3>
+                        @endif
+
                         @if(isset($exterior->second_section_text))
                         <?php echo $exterior->second_section_text; ?>
                         @else
-                        <h3>If You Can Think It, You
-                            Can <span class="blue">Create It</span></h3>
+                        
                         <p>Fully customize your home from the app to whatever fits the occasion</p>
                         <!-- <div class="create-list"> -->
                             <ul>
@@ -205,7 +215,7 @@
         <div class="container">
            
             @if(isset($exterior->last_title))
-            <h3><?php  echo $exterior->last_title; ?></h3>
+            <h3 class="main-heading"><?php  echo $exterior->last_title; ?></h3>
             <div class="row">
                 <?php $title = (array) json_decode($exterior->last_section_titles); ?>
                 @foreach($exterior->images as $imagess)

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('exterior_metas', function (Blueprint $table) {
             $table->id();
             $table->text('background_image')->nullable();
+            $table->text('first_section_title')->nullable();
             $table->text('first_section_text')->nullable();
             $table->string('first_section_image')->nullable();
             $table->text('second_section_images')->nullable();
+            $table->string('second_section_title')->nullable();
             $table->string('second_section_text')->nullable();
             $table->string('second_section_buttontext')->nullable();
             $table->string('last_title')->nullable();

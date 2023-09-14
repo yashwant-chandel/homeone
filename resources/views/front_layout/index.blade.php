@@ -98,11 +98,19 @@
                             <div class="footer-logo">
                                 <img src="{{ asset('front/img/footer-logo.png') }}" alt="">
                             </div>
+                            @if(isset($footer_meta->left_text))
                             <p><?php echo isset($footer_meta->left_text); ?></p>
+                            @else
+                            <p>We custom manufacture the track for every job. This ensures the best colours and depths for each system.</p>
+                            @endif
                             <div class="footer-links">
                                 <ul>
+                                    @if(isset($footer_meta->facebook_link))
                                     <li><a href="//{{ $footer_meta->facebook_link ?? '' }}"><i class="fa-brands fa-facebook"></i></a></li>
+                                    @endif
+                                    @if(isset($footer_meta->instagram_link))
                                     <li><a href="//{{ $footer_meta->instagram_link ?? '' }}"><i class="fa-brands fa-instagram"></i></a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -126,10 +134,14 @@
 
                     <div class="col-md-3">
                         <h4>Contact Info</h4>
-                        <p><strong>Phone:</strong><br>
+                        <p>@if(isset($footer_meta->Phone))
+                            <strong>Phone:</strong><br>
                            <a href="tel:{{ $footer_meta->Phone ?? '' }}"> {{ $footer_meta->Phone ?? '' }} </a><br><br>
+                           @endif
+                           @if(isset($footer_meta->Email))
                             <strong>Email:</strong><br>
                          <a href="mailto:{{ $footer_meta->Email ?? '' }}">{{ $footer_meta->Email ?? '' }} </a>
+                         @endif
                         </p>
                     </div>
                     <div class="col-md-3">
@@ -177,6 +189,17 @@
     </script>
     @endif
     
-
+    <script>
+        $(document).ready(function() {
+            $('.main-heading').each(function() {
+                var text = $(this).text();
+                var halfLength = Math.ceil(text.length / 2); 
+                var firstHalf = text.slice(0, halfLength);
+                var secondHalf = text.slice(halfLength);
+                
+                $(this).html(firstHalf + '<span class="blue">' + secondHalf + '</span>' );
+            });
+        });
+    </script>
 
 </body>

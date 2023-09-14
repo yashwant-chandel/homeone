@@ -8,7 +8,7 @@
         <div class="container">
             <div class="banner-text">
                 @if(isset($homemeta->title))
-                <h1><?php echo $homemeta->title; ?></h1>
+                <h1 class="home-title"><?php echo $homemeta->title; ?></h1>
                 @else
                 <h1>LOVE WHERE <br>
                     YOU LIVE</h1>
@@ -24,7 +24,7 @@
                     <div class="about-text">
                         <span>About Us</span>
                         @if(isset($homemeta->about_us_title))
-                        <h2><?php echo $homemeta->about_us_title; ?></h2>
+                        <h2 class="main-heading"><?php echo $homemeta->about_us_title; ?></h2>
                         @else
                         <h2>What <span class="blue">We</span> <span class="blue">Do</span></h2>
                         @endif
@@ -180,12 +180,15 @@
                 </div>
                 <div class="col-md-6">
                     <div class="create-text">
+                        @if(isset($homemeta->middle_section_title))
+                            <h3 class="main-heading"> <?php echo $homemeta->middle_section_title ?></h3>
+                        @else
+                            <h3>If You Can Think It, You Can <span class="blue">Create It</span></h3>
+                        @endif
                         @if(isset($homemeta->middle_section_text))
                         <?php echo $homemeta->middle_section_text; ?>
                         
                         @else
-                        <h3>If You Can Think It, You
-                            Can <span class="blue">Create It</span></h3>
                         <p>Fully customize your home from the app to whatever fits the occasion</p>
                         <div class="create-list">
                             <ul>
@@ -216,7 +219,11 @@
             <div class="row align-items-center">
                 <div class="col-md-9">
                     <div class="light-head">
+                        @if(isset($homemeta->last_section_title))
+                        <h3 class="main-heading"><?php echo $homemeta->last_section_title; ?></h3>
+                        @else
                         <h3>Alter your lights to fit <span class="blue">the event</span> </h3>
+                        @endif
                         <p>Whether you need to flaunt on game day, commend special times of year, or give an
                             enlightening feel, you'll have the option to alter your lights anyway you like, at whatever
                             point you like.</p>
@@ -300,4 +307,17 @@
         </div>
     </section>
 
+   
+    <script>
+        $(document).ready(function() {
+            $('.home-title').each(function() {
+                var text = $(this).text();
+                var halfLength = Math.ceil(text.length / 2); 
+                var firstHalf = text.slice(0, halfLength);
+                var secondHalf = text.slice(halfLength);
+                
+                $(this).html(firstHalf + '<br>' + secondHalf  );
+            });
+        });
+    </script>
 @endsection

@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('about_us_subtitle')->nullable();
             $table->string('about_us_image')->nullable();
             $table->string('about_us_text')->nullable();
+            $table->text('middle_section_title')->nullable();
             $table->text('middle_section_text')->nullable();
             $table->string('middle_section_image')->nullable();
             $table->string('middle_button_text')->nullable();
+            $table->text('last_section_title')->nullable();
             $table->text('last_section_text')->nullable();
             $table->string('last_section_button_text')->nulllable();
             $table->timestamps();

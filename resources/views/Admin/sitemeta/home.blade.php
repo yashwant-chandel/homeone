@@ -81,6 +81,12 @@
                                                         <span class="preview-title-lg overline-title">Middle Section</span>
                                                         <div class="row">
                                                             <div class="col-sm-6">
+                                                             <div class="form-group">
+                                                                    <label class="form-label" for="middle_section_title">Heading</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <input class="form-control" id="middle_section_title" name="middle_section_title" value="{{ $homemeta->middle_section_title ?? '' }}">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="form-group">
                                                                     <label class="form-label" for="editor2">Text</label>
                                                                     <div class="form-control-wrap">
@@ -119,7 +125,13 @@
                                                         <hr class="preview-hr">
                                                         <span class="preview-title-lg overline-title">Last Section</span>
                                                         <div class="col-sm-6">
-                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="last_section_title">Heading</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input  class="form-control" id="last_section_title" name="last_section_title" value="{{ $homemeta->last_section_title ?? '' }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label class="form-label" for="last_text">Text</label>
                                                                 <div class="form-control-wrap">
                                                                     <textarea  class="form-control" id="editor3" name="last_text" >{{ $homemeta->last_section_text ?? '' }}</textarea>

@@ -31,15 +31,15 @@ class SiteMetaController extends Controller
             $footer_meta->Address2 = $request->address2;
             $footer_meta->update();
         }else{
-        $footer_meta = new FooterMeta();
-        $footer_meta->left_text = $request->footer_text;
-        $footer_meta->facebook_link = $request->facebook;
-        $footer_meta->instagram_link = $request->instagram;
-        $footer_meta->Phone = $request->phone;
-        $footer_meta->Email = $request->email;
-        $footer_meta->Address1 = $request->address1;
-        $footer_meta->Address2 = $request->address2;
-        $footer_meta->save();
+            $footer_meta = new FooterMeta();
+            $footer_meta->left_text = $request->footer_text;
+            $footer_meta->facebook_link = $request->facebook;
+            $footer_meta->instagram_link = $request->instagram;
+            $footer_meta->Phone = $request->phone;
+            $footer_meta->Email = $request->email;  
+            $footer_meta->Address1 = $request->address1;
+            $footer_meta->Address2 = $request->address2;
+            $footer_meta->save();
         }
         return redirect()->back()->with(['success','succcessfully updated']);
     }
@@ -55,6 +55,8 @@ class SiteMetaController extends Controller
             $exterior->second_section_text = $request->second_section_text;
             $exterior->second_section_buttontext = $request->buttontext;
             $exterior->last_title = $request->last_title;
+            $exterior->first_section_title = $request->first_section_title;
+            $exterior->second_section_title = $request->second_section_title;
         if($request->hasFile('background_image')) {
             $backgroundimage = $request->file('background_image');
             $extension = $backgroundimage->getClientOriginalExtension();
@@ -92,6 +94,8 @@ class SiteMetaController extends Controller
             $exterior->second_section_text = $request->second_section_text;
             $exterior->second_section_buttontext = $request->buttontext;
             $exterior->last_title = $request->last_title;
+            $exterior->first_section_title = $request->first_section_title;
+            $exterior->second_section_title = $request->second_section_title;
             if($request->hasFile('background_image')) {
                 $backgroundimage = $request->file('background_image');
                 $extension = $backgroundimage->getClientOriginalExtension();
@@ -252,6 +256,8 @@ class SiteMetaController extends Controller
             $homemeta->middle_button_text = $request->middle_button_text;
             $homemeta->last_section_text = $request->last_text;
             $homemeta->last_section_button_text = $request->last_button_text;
+            $homemeta->middle_section_title = $request->middle_section_title;
+            $homemeta->last_section_title = $request->last_section_title;
         if ($request->hasFile('background_image')) {
             $backgroundimage = $request->file('background_image');
             $extension = $backgroundimage->getClientOriginalExtension();
