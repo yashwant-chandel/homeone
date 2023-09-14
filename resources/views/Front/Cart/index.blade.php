@@ -26,7 +26,7 @@
                     <tr class="cart{{ $c->product->id ?? '' }}">
                       <td data-th="Product" class="product-data-wrap">
                         <div class="cart-wrapper">
-                          <div class="cart-img"><img src="{{ url('productIMG') ?? '' }}/{{ $c->product->featured_image ?? '' }} " alt=""></div>
+                          <div class="cart-img"><img src="{{ asset('productIMG') ?? '' }}/{{ $c->product->featured_image ?? '' }} " alt=""></div>
                           <div class="cart-content">
                            <p><?php echo $c->product->short_note ?></p>
                           </div>
@@ -59,8 +59,8 @@
                     <tbody>
                         <tr>
                             <td> <div class="check-btn">
-                                <input type="text" placeholder="Enter Discount Code" class="cta code">
-                                <a href="#" class="cta cart">Apply Discount</a></div></td>
+                                <!-- <input type="text" placeholder="Enter Discount Code" class="cta code">
+                                <a href="#" class="cta cart">Apply Discount</a></div></td> -->
                                 <td> <div class="cart-btn">
                                     <a href="#" class="updateCart">Update Shopping Cart</a>
                                     <a href="#" class="removeAll">Clear Shopping Cart</a></div></td>
@@ -131,7 +131,7 @@
                  
                 <div class="col-lg-4 col-md-6">
                     <div class="box-products">
-                        <div class="products-img"><img src="{{ url('productIMG') ?? '' }}/{{ $related['featured_image'] ?? '' }}" alt=""></div>
+                        <div class="products-img"><img src="{{ asset('productIMG') ?? '' }}/{{ $related['featured_image'] ?? '' }}" alt=""></div>
                         <div class="products-data">
                             <div class="products-name">
                                 <h4>{{ $related['product_name'] ?? '' }}</h4>

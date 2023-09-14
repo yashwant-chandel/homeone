@@ -24,7 +24,7 @@
                 <ul class="nav nav-tabs" role="tablist">
                    <?php $first = true; ?>
                     @foreach($gallery as $gall)
-                    <li class="nav-item"><a class="nav-link @if($first == true) active @endif" data-toggle="tab" href="#{{ $gall->slug }}"
+                    <li class="nav-item" id="{{ $gall->slug }}-gallery"><a class="nav-link @if($first == true) active @endif" data-toggle="tab" href="#{{ $gall->slug }}"
                             role="tab">{{ $gall->gallery_title }}</a></li>
                             <?php $first = false; ?>
                     @endforeach
@@ -92,4 +92,26 @@
             })
         })
     </script>
+    <script>
+        $(document).ready(function() {
+            var hash = window.location.href.split('#').pop();;
+            console.log(hash);
+            if(hash){
+                var targetOffset = $("#"+hash+"-gallery").offset().top; 
+                $('html, body').animate({ scrollTop: targetOffset }, 1000); 
+
+                $('#'+hash+"-gallery a").click();
+            }
+            // if (window.location.hash === "#holiday") {
+            //     var targetElement = $('#holiday');
+
+            //     if (targetElement.length) {
+            //         $('html, body').animate({
+            //             scrollTop: targetElement.offset().top
+            //         }, 1000); 
+            //     }
+            // }
+        });
+</script>
+
 @endsection

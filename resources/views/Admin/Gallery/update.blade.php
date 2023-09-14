@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="images">Upload Featured Image</label>
+                            <label class="form-label" for="images">Update Featured Image</label>
                             <sup>@error('featured_image')
                                     <div class="error text-danger">{{ $message }}</div>
                                 @enderror</sup>
@@ -52,10 +52,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="smart_lighting">Update lighting Image</label>
+                            <sup>@error('smart_lighting')
+                                    <div class="error text-danger">{{ $message }}</div>
+                                @enderror</sup>
+                            <div class="form-control-wrap">
+                                <div class="form-file">
+                                    <input type="file" class="form-file-input" id="smart_lighting" name="smart_lighting">
+                                    <label class="form-file-label" for="smart_lighting">Update Featured Image</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- <div class="row my-3"> -->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="images">Upload Gallery Images</label>
+                            <label class="form-label" for="images">Update Gallery Images</label>
                             <sup>@error('images')
                                     <div class="error text-danger">{{ $message }}</div>
                                 @enderror</sup>
@@ -67,24 +81,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6"> 
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-lg btn-primary">Update Gallery</button>
-                        </div>
-                    </div>
+                   
                     <div class="col-md-6 ">
+                       
                             <div class="image-row" style="display: flex; flex-wrap: wrap;gap: 1rem;">
                                 @foreach ($gallery->images as $image)
                                 <input type="hidden" name="oldImg[]" value="{{ $image->id ?? '' }}">
                                     <div class="image-container" style="position: relative;margin-right: 1rem;">
                                         <i data-id="{{ $img->id ?? '' }}" class="fas fa-trash-alt text-danger remove-image" style="position: absolute; cursor: pointer;"></i>
-                                        <img class="image-fluid" style="max-width: 5rem" src="{{ url('galleryIMG', $image->image_name) }}" alt="">
+                                        <img class="image-fluid" style="max-width: 5rem" src="{{ asset('galleryIMG/'.$image->image_name) }}" alt="">
                                         <input type="hidden" name="existing_images[]" value="{{ $image->id }}">
                                     </div>
                                 @endforeach
                             </div>
                         </div>
 
+                    </div>
+                    <div class="col-md-6 my-4"> 
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-lg btn-primary">Update Gallery</button>
+                        </div>
                     </div>
                     </div>
                 </div>

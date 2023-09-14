@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('gallery_title');
             $table->string('slug');
             $table->string('featured_image');
+            $table->string('smart_lighting')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });

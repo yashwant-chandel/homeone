@@ -1,6 +1,11 @@
 @extends('front_layout/index')
 @section('layout')
+
+@if(isset($lawn->background_image))
+    <section class="banner-sec" style="background-image: url({{ asset('siteIMG/'.$lawn->background_image) }});">
+    @else
     <section class="banner-sec" style="background-image: url({{ asset('front/img/lawn-bg.png') }});">
+    @endif
         <div class="container">
             <div class="banner-text">
                 <h1>lawn</h1>
@@ -20,18 +25,37 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="simplified-text">
+                        @if(isset($lawn->heading))
+                        <h3><?php
+                        echo $lawn->heading; ?></h3>
+                        @else
                         <h3>Lawn Care <span class="blue">Simplified</span></h3>
+                        @endif
+                        @if(isset($lawn->sub_heading))
+                        <h4><?php
+                        echo $lawn->sub_heading; ?></h4>
+                        @else
                         <h4>You Choose The Freequency Of Treatments!</h4>
+                        @endif
+                        @if(isset($lawn->text))
+                        <p><?php
+                        echo $lawn->text; ?></p>
+                        @else
                         <p>Most lawn service companies over sell and over treat. To give grass the most ideal growing
                             conditions, it needs 3 things. No weeds to fight with, fertilizer, and water. Most other
                             services offered are going to make a minimal difference compared to those 3 treatments. Let
                             us handle the weeds and fertilizer, you take care of the water. You choose the frequency of
                             treatments.</p>
+                            @endif
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="lawn-img">
+                        @if(isset($lawn->image))
+                        <img src="{{ asset('siteIMG/'.$lawn->image) }}" alt="">
+                        @else
                         <img src="{{ asset('front/img/lawn-img.png')}}" alt="">
+                        @endif
                     </div>
                 </div>
             </div>

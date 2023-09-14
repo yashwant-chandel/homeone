@@ -1,31 +1,58 @@
 @extends('front_layout/index')
 @section('layout')
+@if(isset($homemeta->background_image))
+<section class="banner-sec" style="background-image: url({{ asset('siteIMG/'.$homemeta->background_image) }});">
+@else
     <section class="banner-sec" style="background-image: url({{ asset('front/img/banner-img.png') }});">
+    @endif
         <div class="container">
             <div class="banner-text">
+                @if(isset($homemeta->title))
+                <h1><?php echo $homemeta->title; ?></h1>
+                @else
                 <h1>LOVE WHERE <br>
                     YOU LIVE</h1>
+                @endif
             </div>
         </div>
     </section>
+    
     <section class="about-sec p-130 pb-0">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="about-text">
                         <span>About Us</span>
+                        @if(isset($homemeta->about_us_title))
+                        <h2><?php echo $homemeta->about_us_title; ?></h2>
+                        @else
                         <h2>What <span class="blue">We</span> <span class="blue">Do</span></h2>
+                        @endif
+                        @if(isset($homemeta->about_us_subtitle))
+                        <h4><?php echo $homemeta->about_us_subtitle; ?></h4>
+                        @else
                         <h4>We custom manufacture the track for every job. This ensures the best colours and depths for
                             each
                             system.</h4>
+                        @endif 
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="about-img">
-                        <img src="{{ asset('img/about-img.png') }}" alt="">
+                        @if(isset($homemeta->about_us_image))
+                        
+                        <img src="{{ asset('siteIMG/'.$homemeta->about_us_image) }}" alt="">
+                        @else
+                        <img src="img/about-img.png" alt="">
+                        @endif 
                     </div>
                 </div>
             </div>
+            @if(isset($homemeta->about_us_text))
+            <div class="mt-5">
+                <?php echo $homemeta->about_us_text; ?>
+            </div>
+            @else
             <p class="mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                 been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
@@ -33,6 +60,7 @@
                 scrambled it to make a type specimen book. It has survived not only five centuries, but also the
                 leap
                 into electronic typesetting, remaining essentially unchanged. </p>
+            @endif
         </div>
     </section>
     <div class="divider">
@@ -48,25 +76,18 @@
             </div>
             <div class="filter-tabs">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                            aria-controls="home" aria-selected="true">Security</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false">Accent</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                            aria-controls="contact" aria-selected="false">Holiday</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="game-tab" data-toggle="tab" href="#game" role="tab" aria-controls="game"
-                            aria-selected="false">Game Day</a>
-                    </li>
+                    @foreach($galleries as $key => $gallery)
+                        <li class="nav-item @if($key === 0) active @endif" id="list-{{ $gallery->slug ?? '' }}">
+                            <a class="nav-link @if($key === 0) show active @endif" id="home-tab" data-toggle="tab" href="#gallery-{{ $gallery->slug ?? '' }}" role="tab"
+                                aria-controls="home" aria-selected="true">{{ $gallery->gallery_title ?? ''}}</a>
+                        </li>
+                    @endforeach
+                  
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                @foreach($galleries as $key => $gallery)
+     
+                    <div class="tab-pane fade  @if($key === 0) show active @endif" id="gallery-{{ $gallery->slug ?? '' }}" role="tabpanel" aria-labelledby="{{ $gallery->slug ?? '' }}-tab">
                         <div class="image-comparison" data-component="image-comparison-slider">
                             <div class="image-comparison__slider-wrapper">
                                 <label for="image-comparison-range" class="image-comparison__label">Move image
@@ -78,7 +99,7 @@
                                     data-image-comparison-overlay="">
                                     <figure class="image-comparison__figure image-comparison__figure--overlay">
                                         <picture class="image-comparison__picture">
-                                            <img src="https://bosso.biz/img/home/difference-before.jpg" alt=""
+                                            <img src="{{ asset('galleryIMG/'.$gallery->featured_image) }}" alt=""
                                                 class="image-comparison__image">
                                         </picture>
                                     </figure>
@@ -101,7 +122,7 @@
                                 <div class="image-comparison__image-wrapper">
                                     <figure class="image-comparison__figure">
                                         <picture class="image-comparison__picture">
-                                            <img src="https://bosso.biz/img/home/difference-security.jpg" alt=""
+                                            <img src="{{ asset('galleryIMG/'.$gallery->smart_lighting) }}" alt=""
                                                 class="image-comparison__image">
                                         </picture>
                                     </figure>
@@ -109,135 +130,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="image-comparison" data-component="image-comparison-slider">
-                            <div class="image-comparison__slider-wrapper">
-                                <label for="image-comparison-range" class="image-comparison__label">Move image
-                                    comparison slider</label>
-                                <input type="range" min="0" max="100" value="50" class="image-comparison__range"
-                                    id="image-compare-range" data-image-comparison-range="">
-
-                                <div class="image-comparison__image-wrapper  image-comparison__image-wrapper--overlay"
-                                    data-image-comparison-overlay="">
-                                    <figure class="image-comparison__figure image-comparison__figure--overlay">
-                                        <picture class="image-comparison__picture">
-                                            <img src="https://bosso.biz/img/home/difference-before.jpg" alt=""
-                                                class="image-comparison__image">
-                                        </picture>
-                                    </figure>
-                                </div>
-
-                                <div class="image-comparison__slider" data-image-comparison-slider="">
-                                    <span class="image-comparison__thumb" data-image-comparison-thumb="">
-                                        <svg class="image-comparison__thumb-icon" xmlns="http://www.w3.org/2000/svg"
-                                            width="18" height="10" viewBox="0 0 18 10" fill="currentColor">
-                                            <path class="image-comparison__thumb-icon--left"
-                                                d="M12.121 4.703V.488c0-.302.384-.454.609-.24l4.42 4.214a.33.33 0 0 1 0 .481l-4.42 4.214c-.225.215-.609.063-.609-.24V4.703z">
-                                            </path>
-                                            <path class="image-comparison__thumb-icon--right"
-                                                d="M5.879 4.703V.488c0-.302-.384-.454-.609-.24L.85 4.462a.33.33 0 0 0 0 .481l4.42 4.214c.225.215.609.063.609-.24V4.703z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                </div>
-
-                                <div class="image-comparison__image-wrapper">
-                                    <figure class="image-comparison__figure">
-                                        <picture class="image-comparison__picture">
-                                            <img src="https://bosso.biz/img/home/difference-accent.jpg" alt=""
-                                                class="image-comparison__image">
-                                        </picture>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <div class="image-comparison" data-component="image-comparison-slider">
-                            <div class="image-comparison__slider-wrapper">
-                                <label for="image-comparison-range" class="image-comparison__label">Move image
-                                    comparison slider</label>
-                                <input type="range" min="0" max="100" value="50" class="image-comparison__range"
-                                    id="image-compare-range" data-image-comparison-range="">
-
-                                <div class="image-comparison__image-wrapper  image-comparison__image-wrapper--overlay"
-                                    data-image-comparison-overlay="">
-                                    <figure class="image-comparison__figure image-comparison__figure--overlay">
-                                        <picture class="image-comparison__picture">
-                                            <img src="https://bosso.biz/img/home/difference-before.jpg" alt=""
-                                                class="image-comparison__image">
-                                        </picture>
-                                    </figure>
-                                </div>
-
-                                <div class="image-comparison__slider" data-image-comparison-slider="">
-                                    <span class="image-comparison__thumb" data-image-comparison-thumb="">
-                                        <svg class="image-comparison__thumb-icon" xmlns="http://www.w3.org/2000/svg"
-                                            width="18" height="10" viewBox="0 0 18 10" fill="currentColor">
-                                            <path class="image-comparison__thumb-icon--left"
-                                                d="M12.121 4.703V.488c0-.302.384-.454.609-.24l4.42 4.214a.33.33 0 0 1 0 .481l-4.42 4.214c-.225.215-.609.063-.609-.24V4.703z">
-                                            </path>
-                                            <path class="image-comparison__thumb-icon--right"
-                                                d="M5.879 4.703V.488c0-.302-.384-.454-.609-.24L.85 4.462a.33.33 0 0 0 0 .481l4.42 4.214c.225.215.609.063.609-.24V4.703z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                </div>
-
-                                <div class="image-comparison__image-wrapper">
-                                    <figure class="image-comparison__figure">
-                                        <picture class="image-comparison__picture">
-                                            <img src="https://bosso.biz/img/home/difference-holiday.jpg" alt=""
-                                                class="image-comparison__image">
-                                        </picture>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="game" role="tabpanel" aria-labelledby="game-tab">
-                        <div class="image-comparison" data-component="image-comparison-slider">
-                            <div class="image-comparison__slider-wrapper">
-                                <label for="image-comparison-range" class="image-comparison__label">Move image
-                                    comparison slider</label>
-                                <input type="range" min="0" max="100" value="50" class="image-comparison__range"
-                                    id="image-compare-range" data-image-comparison-range="">
-
-                                <div class="image-comparison__image-wrapper  image-comparison__image-wrapper--overlay"
-                                    data-image-comparison-overlay="">
-                                    <figure class="image-comparison__figure image-comparison__figure--overlay">
-                                        <picture class="image-comparison__picture">
-                                            <img src="https://bosso.biz/img/home/difference-before.jpg" alt=""
-                                                class="image-comparison__image">
-                                        </picture>
-                                    </figure>
-                                </div>
-
-                                <div class="image-comparison__slider" data-image-comparison-slider="">
-                                    <span class="image-comparison__thumb" data-image-comparison-thumb="">
-                                        <svg class="image-comparison__thumb-icon" xmlns="http://www.w3.org/2000/svg"
-                                            width="18" height="10" viewBox="0 0 18 10" fill="currentColor">
-                                            <path class="image-comparison__thumb-icon--left"
-                                                d="M12.121 4.703V.488c0-.302.384-.454.609-.24l4.42 4.214a.33.33 0 0 1 0 .481l-4.42 4.214c-.225.215-.609.063-.609-.24V4.703z">
-                                            </path>
-                                            <path class="image-comparison__thumb-icon--right"
-                                                d="M5.879 4.703V.488c0-.302-.384-.454-.609-.24L.85 4.462a.33.33 0 0 0 0 .481l4.42 4.214c.225.215.609.063.609-.24V4.703z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                </div>
-
-                                <div class="image-comparison__image-wrapper">
-                                    <figure class="image-comparison__figure">
-                                        <picture class="image-comparison__picture">
-                                            <img src="https://bosso.biz/img/home/difference-game-day.jpg" alt=""
-                                                class="image-comparison__image">
-                                        </picture>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -263,6 +156,16 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="create-slider">
+                        @if(isset($homemeta->middle_section_image))
+                        <?php $imagess = json_decode($homemeta->middle_section_image); ?>
+                        @endif
+                        @if(isset($imagess[0]))
+                        @foreach($imagess as $img)
+                        <div class="create-img">
+                            <img src="{{ asset('siteIMG/'.$img) }}" alt="">
+                        </div>
+                        @endforeach
+                        @else
                         <div class="create-img">
                             <img src="img/Screen-01.png" alt="">
                         </div>
@@ -272,10 +175,15 @@
                         <div class="create-img">
                             <img src="img/Screen-03.png" alt="">
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="create-text">
+                        @if(isset($homemeta->middle_section_text))
+                        <?php echo $homemeta->middle_section_text; ?>
+                        
+                        @else
                         <h3>If You Can Think It, You
                             Can <span class="blue">Create It</span></h3>
                         <p>Fully customize your home from the app to whatever fits the occasion</p>
@@ -288,6 +196,7 @@
                                 <li><a href="#">There are many variations of passages</a></li>
                             </ul>
                         </div>
+                        @endif
                         <a href="#" class="cta">Purchase What You Love!</a>
                     </div>
                 </div>
@@ -318,36 +227,26 @@
                 </div>
             </div>
             <div class="light-slider">
-                <div class="light-list">
-                    <div class="light-box light">
-                        <div class="light-img">
-                            <img src="img/light-1.png" alt="">
-                        </div>
-                        <div class="light-text">
-                            <h4>Accent Lighting</h4>
-                        </div>
-                        <div class="light-btn">
-                            <a href="#">View accent lighting photos<i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="light-list">
-                    <div class="light-box light">
-                        <div class="light-img">
-                            <img src="img/light-2.png" alt="">
-                        </div>
-                        <div class="light-text">
-                            <h4>Security Lighting</h4>
-                        </div>
-                        <div class="light-btn">
-                            <a href="#">View accent lighting photos<i class="fa-solid fa-arrow-right"></i></a>
+                @foreach($galleries as $key => $gallery)
+                    <div class="light-list">
+                        <div class="light-box light">
+                            <div class="light-img">
+                                <img src="{{ asset('galleryIMG/'.$gallery->featured_image) }}" alt="">
+                            </div>
+                            <div class="light-text">
+                                <h4>{{ $gallery->gallery_title ?? '' }}</h4>
+                            </div>
+                            <div class="light-btn">
+                                <a href="{{ url('gallery')}}#{{$gallery->slug ?? '' }}" data-id="list-{{ $gallery->slug ?? '' }}" class="scroll-to-filter">View {{ $gallery->gallery_title ?? '' }} lighting photos<i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="light-list">
+                @endforeach
+                <!-- <div class="light-list">
                     <div class="light-box light">
                         <div class="light-img">
-                            <img src="img/light-3.png" alt="">
+                            <img src="{{ asset('front/img/light-2.png') }}" alt="">
+
                         </div>
                         <div class="light-text">
                             <h4>Security Lighting</h4>
@@ -360,7 +259,20 @@
                 <div class="light-list">
                     <div class="light-box light">
                         <div class="light-img">
-                            <img src="img/light-1.png" alt="">
+                            <img src="{{ asset('front/img/light-3.png') }}" alt="">
+                        </div>
+                        <div class="light-text">
+                            <h4>Security Lighting</h4>
+                        </div>
+                        <div class="light-btn">
+                            <a href="#">View accent lighting photos<i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="light-list">
+                    <div class="light-box light">
+                        <div class="light-img">
+                            <img src="{{ asset('front/img/light-1.png') }}" alt="">
                         </div>
                         <div class="light-text">
                             <h4>Holiday Lighting</h4>
@@ -373,7 +285,8 @@
                 <div class="light-list">
                     <div class="light-box light">
                         <div class="light-img">
-                            <img src="img/light-3.png" alt="">
+                            <img src="{{ asset('front/img/light-3.png') }}" alt="">
+
                         </div>
                         <div class="light-text">
                             <h4>Game Day Lighting</h4>
@@ -382,7 +295,7 @@
                             <a href="#">View accent lighting photos<i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

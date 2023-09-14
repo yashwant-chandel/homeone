@@ -13,6 +13,9 @@
             </nav>
         </div>
     </section>
+    @php
+    $footer_meta =  App\Models\FooterMeta::first();
+   @endphp
 
     <section class="contact-us-sec p-130">
         <div class="container">
@@ -24,8 +27,7 @@
 
                         </div>
                         <div class="contact-text">
-                            <p>15 - 1339 40th Ave Ne, Calgary, Alberta. T2E 8N6
-                                1602 3rd Ave S, Lethbridge, Alberta. T1J 0L2</p>
+                            <p>{{ $footer_meta->Address1 ?? '' }}</p>
 
                         </div>
 
@@ -39,7 +41,7 @@
                         </div>
                         <div class="contact-text">
                             <h6>Phone</h6>
-                            <a href="tel:+4733378901">+  866 233 7351</a>
+                            <a href="tel:{{ $footer_meta->Phone ?? '' }}">{{ $footer_meta->Phone ?? '' }}</a>
 
                         </div>
 
@@ -72,18 +74,32 @@
                     <h4>Leave Us Your Info And We Will Get Back To You</h4>
                 </div>
 
-                <form class="contact_detail-form" method="post" action="{{ url('') }}">
+                <form class="contact_detail-form" method="post" action="{{ url('contactSubmit') }}">
+                    @csrf
+                        
                     <div class="form-group">
-                        <input type="text" class="form-control"  aria-describedby="emailHelp" name="name" placeholder="Name">
+                        <sup>@error('name')
+                                <div class="error text-danger">{{ $message }}</div>
+                        @enderror</sup>
+                        <input type="text" class="form-control"   name="name" placeholder="Name">
                       </div>
                       <div class="form-group">
-                        <input type="Email" class="form-control"  aria-describedby="emailHelp" name="email" placeholder="Email">
+                      <sup>@error('email')
+                                <div class="error text-danger">{{ $message }}</div>
+                        @enderror</sup>
+                        <input type="Email" class="form-control"  name="email" placeholder="Email">
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control"  aria-describedby="emailHelp" name="city" placeholder="City">
+                      <sup>@error('city')
+                                <div class="error text-danger">{{ $message }}</div>
+                        @enderror</sup>
+                        <input type="text" class="form-control"   name="city" placeholder="City">
                       </div>
                       <div class="form-group">
-                        <textarea id="w3review" name="w3review" rows="4" cols="50" placeholder="Message"></textarea>
+                      <sup>@error('message')
+                                <div class="error text-danger">{{ $message }}</div>
+                        @enderror</sup>
+                        <textarea id="w3review" name="message" rows="4" cols="50" placeholder="Message"></textarea>
                       </div>
 
                       <div class="submit_cta">

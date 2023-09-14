@@ -142,7 +142,7 @@
                                     <?php $img = \App\Models\Media::find($image); ?>
                                     <div class="image-container" style="position: relative;margin-right: 1rem;">
                                         <i data-id="{{ $img->id ?? '' }}" class="fas fa-trash-alt text-danger remove-image" style="position: absolute; cursor: pointer;"></i>
-                                        <img class="image-fluid" style="max-width: 5rem" src="{{ url('productIMG', $img->image_name) }}" alt="">
+                                        <img class="image-fluid" style="max-width: 5rem" src="{{ asset('productIMG') ?? ''  }}/{{ $img->image_name ?? '' }}" alt="">
                                         <input type="hidden" name="existing_images[]" value="{{ $img->id }}">
                                     </div>
                                 @endforeach

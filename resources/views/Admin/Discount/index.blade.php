@@ -3,8 +3,13 @@
 
 <div class="nk-block nk-block-lg">
                                         <div class="nk-block-head">
-                                            <div class="nk-block-head-content">
-                                                <h4 class="nk-block-title">Discount Coupons</h4>
+                                            <div class="nk-block-head-content d-flex justify-content-between">
+                                                <div>
+                                                    <h4 class="nk-block-title">Discount Coupons</h4>
+                                                </div>
+                                                <div>
+                                                    {{ Breadcrumbs::render('discount-list') }}
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="card card-bordered card-preview">
@@ -46,20 +51,20 @@
                                                             </div>
                                                             <div class="tb-tnx-date">
                                                                 <span class="date">{{ $d->amount ?? '' }}</span>
-                                                                <span class="date">{{ $d->expire_on ?? '' }}</span>
+                                                                <span class="date">{{ $d->discount_type }}</span>
                                                             </div>
                                                         </td>
                                                         <td class="tb-tnx-amount">
                                                             <div class="tb-tnx-total">
-                                                                <span class="amount">{{ $d->discount_type ?? '' }}</span>
+                                                                <span class="amount">{{ $d->discount_use ?? '' }}</span>
                                                             </div>
                                                             <div class="tb-tnx-status">
-                                                                <span class="badge badge-dot bg-warning">{{ $d->discount_use ?? '' }}</span>
+                                                                <span class="amount">{{ $d->discount_used ?? '-' }}</span>
                                                             </div>
                                                         </td>
                                                         <td class="tb-tnx-amount">
                                                              <div class="tb-tnx-total">
-                                                                <span class="amount">{{ $d->discount_used ?? '' }}</span>
+                                                                <span class="amount">{{ $d->expire_on ?? '' }}</span>
                                                             </div>
                                                             <div class="tb-tnx-status">
                                                                 <span class="">

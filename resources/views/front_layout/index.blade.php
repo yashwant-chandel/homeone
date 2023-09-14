@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/style.css?ajfksdjhsdf') }}">
     <link rel="stylesheet" href="{{ asset('front/font/stylesheet.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/custom.css') }}">
     <!-- Toaster -->
@@ -85,6 +85,9 @@
     </header>
 
     @yield('layout')
+    @php
+    $footer_meta =  App\Models\FooterMeta::first();
+   @endphp
 
     <footer class="site-footer light">
         <div class="top-footer p-130">
@@ -93,16 +96,13 @@
                     <div class="col-md-3">
                         <div class="foot-text">
                             <div class="footer-logo">
-                                <img src="img/footer-logo.png" alt="">
+                                <img src="{{ asset('front/img/footer-logo.png') }}" alt="">
                             </div>
-                            <p>We custom manufacture the track for every job. This ensures the best colours and depths
-                                for
-                                each
-                                system.</p>
+                            <p><?php echo isset($footer_meta->left_text); ?></p>
                             <div class="footer-links">
                                 <ul>
-                                    <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                    <li><a href="//{{ $footer_meta->facebook_link ?? '' }}"><i class="fa-brands fa-facebook"></i></a></li>
+                                    <li><a href="//{{ $footer_meta->instagram_link ?? '' }}"><i class="fa-brands fa-instagram"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -123,22 +123,23 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="col-md-3">
                         <h4>Contact Info</h4>
                         <p><strong>Phone:</strong><br>
-                            866 233 7351 <br><br>
+                           <a href="tel:{{ $footer_meta->Phone ?? '' }}"> {{ $footer_meta->Phone ?? '' }} </a><br><br>
                             <strong>Email:</strong><br>
-                            info@myhomeone.ca
+                         <a href="mailto:{{ $footer_meta->Email ?? '' }}">{{ $footer_meta->Email ?? '' }} </a>
                         </p>
                     </div>
                     <div class="col-md-3">
                         <h4>Locations</h4>
                         <p><strong>Address 1:</strong> <br>
-                            15 - 1339 40th Ave Ne, Calgary, <br> Alberta. T2E 8N6
+                            {{ $footer_meta->Address1 ?? '' }}
                             <br>
                             <br>
                             <strong>Address 2:</strong> <br>
-                            1602 3rd Ave S, Lethbridge, Alberta. T1J 0L2
+                            {{ $footer_meta->Address2 ?? '' }}
                         </p>
                     </div>
                 </div>
@@ -148,7 +149,7 @@
             <div class="container">
                 <div class="copy-write_wrapper">
                     <p>© Copyright 2023 Home One Inc. All Rights Reserved.</p>
-                    <p>Privacy Policy | Terms of Service</p>
+                    <p><a href="{{ url('privacy-policy') }}">Privacy Policy</a> | <a href="{{ url('privacy-policy') }}">Terms of Service</a></p>
                 </div>
             </div>
         </div>

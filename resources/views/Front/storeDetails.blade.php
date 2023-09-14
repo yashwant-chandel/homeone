@@ -19,7 +19,7 @@
                     <div class="main">
                             <div class="slider slider-for">
                                 <div class="store-img">
-                                <img src="{{ url('productIMG') ?? '' }}/{{ $product->featured_image ?? '' }}" alt="">
+                                <img src="{{ asset('productIMG') ?? '' }}/{{ $product->featured_image ?? '' }}" alt="">
 
                                 </div>
                                 @if(is_array($images))
@@ -29,7 +29,7 @@
                                         $image = \App\Models\Media::find($img);
                                     ?>
                                     <div class="store-img">
-                                        <img src="{{ $image->image_path ?? '' }}" alt="">
+                                        <img src="{{ asset('productIMG') ?? '' }}/{{  $image->image_name ?? ''}}" alt="">
                                     </div>   
                                 @endforeach
                                 
@@ -38,7 +38,7 @@
                            
                             <div class="slider slider-nav">
                                 <div class="custom-img">
-                                <img src="{{ url('productIMG') ?? '' }}/{{ $product->featured_image ?? '' }}" alt="">
+                                <img src="{{ asset('productIMG') ?? '' }}/{{ $product->featured_image ?? '' }}" alt="">
 
                                 </div>
                                 @if(is_array($images))
@@ -47,7 +47,7 @@
                                         $image2 = \App\Models\Media::find($img);
                                     ?>
                                     <div class="custom-img">
-                                    <img src="{{ $image2->image_path ?? '' }}" alt="">
+                                    <img src="{{ asset('productIMG') ?? '' }}/{{  $image2->image_name ?? ''}}" alt="">
                                     </div>   
                                 @endforeach
                                 @endif
@@ -159,7 +159,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="icon_img">
-                        <img src="{{ url('front/img/icon-img1.png') ?? '' }}" alt="">
+                        <img src="{{ asset('front/img/icon-img1.png') ?? '' }}" alt="">
 
                         <h5>Fast Delivery</h5>
 
@@ -168,7 +168,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="icon_img">
-                        <img src="{{ url('front/img/icon-img2.png') ?? '' }}" alt="">
+                        <img src="{{ asset('front/img/icon-img2.png') ?? '' }}" alt="">
 
                         <h5>Satisfied or Refunded</h5>
 
@@ -177,7 +177,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="icon_img">
-                        <img src="{{ url('front/img/icon-img3.png') ?? '' }}" alt="">
+                        <img src="{{ asset('front/img/icon-img3.png') ?? '' }}" alt="">
                         <h5>Secure Payments</h5>
                     </div>
 

@@ -55,6 +55,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label class="form-label" for="images">Upload lighting Images</label>
+                            <sup>@error('smart_lighting')
+                                    <div class="error text-danger">{{ $message }}</div>
+                                @enderror</sup>
+                            <div class="form-control-wrap">
+                                <div class="form-file">
+                                    <input type="file" class="form-file-input" id="smart_lighting" name="smart_lighting">
+                                    <label class="form-file-label" for="smart_lighting">Choose lighting Image</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label class="form-label" for="images">Upload Gallery Images</label>
                             <sup>@error('images')
                                     <div class="error text-danger">{{ $message }}</div>

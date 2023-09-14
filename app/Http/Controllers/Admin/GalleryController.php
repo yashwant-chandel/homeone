@@ -28,6 +28,7 @@ class GalleryController extends Controller
             'slug' => 'required|unique:galleries',
             'images' => 'required',
             'featured_image' => 'required',
+            'smart_lighting' => 'required',
         ]);
         try{
                 $gallery = new Gallery;
@@ -40,6 +41,14 @@ class GalleryController extends Controller
                         $featuredImage->move(public_path().'/galleryIMG/',$featuredImageName);
                         
                         $gallery->featured_image = $featuredImageName;    
+                    }
+                    if ($request->hasFile('smart_lighting')) {
+                        $smart_lighting = $request->file('smart_lighting');
+                        $extension = $smart_lighting->getClientOriginalExtension();
+                        $smart_lightingName = 'gallery_'.rand(0,1000).time().'.'.$extension;
+                        $smart_lighting->move(public_path().'/galleryIMG/',$smart_lightingName);
+                        
+                        $gallery->smart_lighting = $smart_lightingName;    
                     }
                
                 $gallery->save();
@@ -66,7 +75,7 @@ class GalleryController extends Controller
     }
 
     public function galleryUpdate(Request $request){       
-            // if ($request->has('existing_images') || $request->hasFile('images')) {
+            if ($request->has('existing_images') || $request->hasFile('images')) {
 
             if ($request->id) {
                 $request->validate([
@@ -110,14 +119,22 @@ class GalleryController extends Controller
                         
                         $gallery->featured_image = $featuredImageName;    
                     }
+                    if ($request->hasFile('smart_lighting')) {
+                        $smart_lighting = $request->file('smart_lighting');
+                        $extension = $smart_lighting->getClientOriginalExtension();
+                        $smart_lightingName = 'gallery_'.rand(0,1000).time().'.'.$extension;
+                        $smart_lighting->move(public_path().'/galleryIMG/',$smart_lightingName);
+                        
+                        $gallery->smart_lighting = $smart_lightingName;    
+                    }
                     $imageNames = $this->uploadImages($request, $gallery->id);
                     $gallery->save();
 
                     return redirect('admin-dashboard/gallery-edit/' . $request->slug)->with('success','Gallery has been updated');
                 
-                // }else{
-                //     return redirect()->back()->with('error','Failed to update gallery not found !');
-                // }
+                }else{
+                    return redirect()->back()->with('error','Failed to update gallery not found !');
+                }
              
         }
                 

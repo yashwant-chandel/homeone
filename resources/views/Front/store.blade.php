@@ -1,6 +1,6 @@
 @extends('front_layout/index')
 @section('layout')
-<section class="banner-sec" style="background-image: url({{ url('front/img/store-banner.png')}});">
+<section class="banner-sec" style="background-image: url({{ asset('front/img/store-banner.png')}});">
     <div class="container">
         <div class="banner-text">
             <h1>Store</h1>
@@ -32,7 +32,7 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="box-products">
-                    <div class="products-img"><img src="{{ url('productIMG')}}/{{ $product->featured_image ?? ''}}"
+                    <div class="products-img"><img src="{{ asset('productIMG')}}/{{ $product->featured_image ?? ''}}"
                             alt=""></div>
                     <div class="products-data">
                         <div class="products-name">

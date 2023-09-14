@@ -189,7 +189,7 @@
                                             <tr>
                                                 <td class="padd-product">
                                                     <div class="cart-wrapper">
-                                                        <div class="cart-img"><img src="{{ url('productIMG') ?? '' }}/{{ $c->product->featured_image ?? '' }}" alt=""></div>
+                                                        <div class="cart-img"><img src="{{ asset('productIMG') ?? '' }}/{{ $c->product->featured_image ?? '' }}" alt=""></div>
                                                         <div class="cart-content">
                                                          <p><?php print_r($c->product->short_note) ?> </p>
                                                         </div>
@@ -352,7 +352,9 @@
                                 message: 'Discount Coupon has been applied',
                                 position: 'topRight'
                             });
-                            $('.discountText').html('$'+response.success);
+                            discount_amount = parseInt(response.total)-parseInt(response.success);
+                            
+                            $('.discountText').html('$'+discount_amount);
                             $('.totalAmount').html('$'+response.success);
                             $('.dicount_code').val(discount_code);
                             $('.discount_amount').val(response.success);
